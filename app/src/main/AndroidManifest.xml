@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NanamYuk">
         <activity
+            android:name=".AddPlantActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true"
             android:label="@string/title_activity_home">
