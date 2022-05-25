@@ -1,5 +1,6 @@
 package com.irfan.nanamyuk
 
+import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,7 +18,6 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
-        supportActionBar?.hide()
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
@@ -30,9 +30,6 @@ class HomeActivity : AppCompatActivity() {
                 R.id.navigation_dashboard, R.id.navigation_add, R.id.navigation_setting
             )
         )
-        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-
     }
 }

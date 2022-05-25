@@ -3,12 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.18" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.269" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.269" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.269" />
-        <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/activity_home.xml" value="0.17829457364341086" />
+        <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/activity_add_plant.xml" value="0.3625" />
+        <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/activity_home.xml" value="0.325437693099897" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/fragment_add.xml" value="0.13994565217391305" />
+        <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/fragment_add.xml" value="0.33" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/fragment_dashboard.xml" value="0.358695652173913" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/fragment_home.xml" value="0.358695652173913" />
         <entry key="..\:/00-Bangkit/capstne/NanamYuk-Android/app/src/main/res/layout/fragment_notifications.xml" value="0.358695652173913" />

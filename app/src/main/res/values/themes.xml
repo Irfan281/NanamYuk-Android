@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.NanamYuk" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.NanamYuk" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/accent_main</item>
         <item name="colorPrimaryVariant">@color/accent_main</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/text_main</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/accent_secondary</item>
         <item name="colorSecondaryVariant">@color/accent_secondary</item>
