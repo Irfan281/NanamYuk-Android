@@ -1,11 +1,12 @@
-package com.irfan.nanamyuk
+package com.irfan.nanamyuk.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.irfan.nanamyuk.R
 
-class AddPlantActivity : AppCompatActivity() {
+class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_add_plant)
+        setContentView(R.layout.activity_detail)
     }
 }
