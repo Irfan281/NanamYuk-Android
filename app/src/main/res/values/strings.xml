@@ -9,4 +9,10 @@
     <string name="halo">Halo,</string>
     <string name="name">Muhammad Irfan</string>
     <string name="date">Rabu, 25 Mei 2022</string>
+    <string name="rekomendasi_tanaman">Rekomendasi Tanaman</string>
+    <string name="rekomendasi_tanaman_description">Anda akan diberikan rekomendasi yang cocok berdasarkan cuaca dan lingkungan tanah</string>
+    <string name="atau">atau</string>
+    <string name="pilih_tanaman">Pilih Tanaman</string>
+    <string name="pilih_tanaman_description">Anda dapat memilih tanaman anda sendiri</string>
+    <string name="lanjut">Lanjut</string>
 </resources>
