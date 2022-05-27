@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NanamYuk">
         <activity
+            android:name=".FormActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.detail.DetailActivity"
             android:exported="false" />
         <activity
