@@ -20,11 +20,11 @@
         tools:ignore="ImageContrastCheck" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/tv_tambah"
         style="@style/text.medium"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/tambah_tanaman"
+        android:text="@string/pilih_metode"
         android:textColor="@color/text_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,81 +38,68 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.card.MaterialCardView
+        <RadioButton
+            style="@style/text.header"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
-            app:strokeColor="@color/stroke_secondary"
-            app:strokeWidth="1dp">
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:minHeight="48dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="@string/rekomendasi_tanaman" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:button="@android:color/transparent" />
-
-            <TextView
-                style="@style/text.title"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/rekomendasi_tanaman"
-                android:textColor="@color/text_main" />
-
-            <TextView
-                style="@style/text.description"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/rekomendasi_tanaman_description"
-                android:textColor="@color/text_main" />
-        </com.google.android.material.card.MaterialCardView>
         <TextView
-            style="@style/text.description"
-            android:textColor="@color/text_main"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center"
-            android:text="@string/atau"/>
-        <com.google.android.material.card.MaterialCardView
+            style="@style/text.subheader"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:cardCornerRadius="10dp"
-            app:strokeColor="@color/stroke_secondary"
-            app:strokeWidth="1dp">
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="24dp"
+            android:paddingHorizontal="16dp"
+            android:text="@string/rekomendasi_tanaman_description"
+            android:textColor="@color/text_secondary" />
 
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_margin="16dp"
-                android:button="@android:color/transparent" />
+        <!--        <TextView-->
+        <!--            style="@style/text.description"-->
+        <!--            android:textColor="@color/text_main"-->
+        <!--            android:layout_marginVertical="8dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:text="@string/atau"/>-->
 
-            <TextView
-                style="@style/text.title"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/pilih_tanaman"
-                android:textColor="@color/text_main" />
+        <RadioButton
+            style="@style/text.header"
+            android:layout_width="match_parent"
+            android:background="@drawable/radio_selector"
+            android:button="@android:color/transparent"
+            android:minHeight="48dp"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="@string/pilih_tanaman" />
 
-            <TextView
-                style="@style/text.description"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="40dp"
-                android:layout_marginBottom="16dp"
-                android:text="@string/pilih_tanaman_description"
-                android:textColor="@color/text_main" />
-        </com.google.android.material.card.MaterialCardView>
+        <TextView
+            style="@style/text.subheader"
+            android:layout_marginTop="2dp"
+            android:paddingHorizontal="16dp"
+            android:text="@string/pilih_tanaman_description"
+            android:textColor="@color/text_secondary" />
+
+
     </RadioGroup>
 
     <Button
         android:id="@+id/next_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="148dp"
+        style="@style/text.title"
+        android:layout_height="40dp"
         android:layout_marginEnd="24dp"
-        style="@style/text.description"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button_next"
+        android:drawableEnd="@drawable/ic_arrow"
+        android:paddingEnd="8dp"
         android:text="@string/lanjut"
+        android:textAlignment="viewEnd"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/choiceMethod" />
+        tools:ignore="RtlSymmetry" />
 </androidx.constraintlayout.widget.ConstraintLayout>

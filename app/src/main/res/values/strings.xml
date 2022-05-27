@@ -9,10 +9,17 @@
     <string name="halo">Halo,</string>
     <string name="name">Muhammad Irfan</string>
     <string name="date">Rabu, 25 Mei 2022</string>
+    <string name="nama_bunga">Nama Bunga</string>
+    <string name="nama_penanda">Nama Penanda</string>
+    <string name="date_1">08.00, 12 April 2022</string>
+    <string name="belum_siram">Belum Siram</string>
+    <string name="sudah_siram">Sudah Siram</string>
     <string name="rekomendasi_tanaman">Rekomendasi Tanaman</string>
     <string name="rekomendasi_tanaman_description">Anda akan diberikan rekomendasi yang cocok berdasarkan cuaca dan lingkungan tanah</string>
     <string name="atau">atau</string>
     <string name="pilih_tanaman">Pilih Tanaman</string>
     <string name="pilih_tanaman_description">Anda dapat memilih tanaman anda sendiri</string>
     <string name="lanjut">Lanjut</string>
+    <string name="pilih_metode">Pilih Metode Tambah Tanaman</string>
+    <string name="title_activity_tes">tes</string>
 </resources>
