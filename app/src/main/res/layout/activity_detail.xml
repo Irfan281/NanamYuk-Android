@@ -6,4 +6,140 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
+    <ImageView
+        android:id="@+id/imagePlant"
+        android:layout_width="match_parent"
+        android:layout_height="238dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ImageContrastCheck"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/plantTag"
+        style="@style/text.medium"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="24dp"
+        android:text="Tag tanaman"
+        android:textColor="@color/text_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagePlant" />
+
+    <TextView
+        android:id="@+id/plantName"
+        style="@style/text.subheader"
+        android:layout_marginTop="12dp"
+        android:text="Nama tanaman"
+        android:textColor="@color/text_main"
+        app:layout_constraintStart_toStartOf="@+id/plantTag"
+        app:layout_constraintTop_toBottomOf="@+id/plantTag" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toBottomOf="@+id/plantName"
+        app:strokeColor="@color/stroke_secondary"
+        app:strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/temperature"
+            style="@style/text.title"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Temperature"
+            android:textColor="@color/text_main" />
+
+        <TextView
+            android:id="@+id/textTemperature"
+            style="@style/text.description"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
+            android:text="30 C"
+            android:textColor="@color/text_main" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDurasiSiram"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="20dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/plantName"
+        app:strokeColor="@color/stroke_secondary"
+        app:strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/durasiSiram"
+            style="@style/text.title"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Durasi siram"
+            android:textColor="@color/text_main" />
+
+        <TextView
+            android:id="@+id/textDurasiSiram"
+            style="@style/text.description"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
+            android:text="12 Jam"
+            android:textColor="@color/text_main" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardDeskripsi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="28dp"
+        app:cardCornerRadius="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.465"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardTemperature"
+        app:strokeColor="@color/stroke_secondary"
+        app:strokeWidth="1dp">
+
+        <TextView
+            android:id="@+id/deskripsi"
+            style="@style/text.title"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Deskripsi"
+            android:textColor="@color/text_main" />
+
+        <TextView
+            android:id="@+id/textDeskripsi"
+            style="@style/text.description"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="16dp"
+            android:text="Anggrek adalah bungga yang tidak usah sering disirm"
+            android:textColor="@color/text_main" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="222dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
