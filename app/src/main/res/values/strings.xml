@@ -14,7 +14,7 @@
     <string name="date_1">08.00, 12 April 2022</string>
     <string name="belum_siram">Belum Siram</string>
     <string name="sudah_siram">Sudah Siram</string>
-    <string name="rekomendasi_tanaman">Rekomendasi Tanaman</string>
+    <string name="rekomendasi_tanaman">"Rekomendasi Tanaman</string>
     <string name="rekomendasi_tanaman_description">Anda akan diberikan rekomendasi yang cocok berdasarkan cuaca dan lingkungan tanah</string>
     <string name="atau">atau</string>
     <string name="pilih_tanaman">Pilih Tanaman</string>
@@ -22,4 +22,15 @@
     <string name="lanjut">Lanjut</string>
     <string name="pilih_metode">Pilih Metode Tambah Tanaman</string>
     <string name="title_activity_tes">tes</string>
+    <string name="error_email">Format Email Tidak Sesuai</string>
+    <string name="error_password">Password minimal 6 karakter</string>
+    <string name="login">Login</string>
+    <string name="login_msg">Silakan login untuk lanjut</string>
+    <string name="login_msg_2">Sudah Punya Akun?</string>
+    <string name="daftar_msg">Belum Punya Akun?</string>
+    <string name="daftar">Daftar</string>
+    <string name="daftar_msg_2">Daftar untuk membuat akun</string>
+    <string name="email">Email Anda</string>
+    <string name="password">Password Anda</string>
+    <string name="nama_anda">Nama Anda</string>
 </resources>

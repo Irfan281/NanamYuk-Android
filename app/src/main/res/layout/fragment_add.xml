@@ -6,19 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.add.AddFragment">
 
-    <ImageView
-        android:id="@+id/blob"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="-20dp"
-        android:contentDescription="@string/blob"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_blob_2"
-        tools:ignore="ImageContrastCheck" />
-
     <TextView
         android:id="@+id/tv_tambah"
         style="@style/text.medium"
