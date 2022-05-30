@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
-        android:id="@+id/choiceMethod"
+        android:id="@+id/rgMethod"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -28,6 +28,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
+            android:id="@+id/rbRecom"
             style="@style/text.header"
             android:layout_width="match_parent"
             android:background="@drawable/radio_selector"
@@ -54,6 +55,7 @@
         <!--            android:text="@string/atau"/>-->
 
         <RadioButton
+            android:id="@+id/rbChoice"
             style="@style/text.header"
             android:layout_width="match_parent"
             android:background="@drawable/radio_selector"
