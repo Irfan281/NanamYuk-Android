@@ -1,4 +1,22 @@
 <resources>
+    <string-array name="data_nama_tanah">
+        <item>Tanah berpasir</item>
+        <item>Tanah liat</item>
+        <item>Tanah lempung</item>
+    </string-array>
+
+    <string-array name="data_deskripsi_tanah">
+        <item>Ringan, hangat, kering dan cenderung asam dan rendah nutrisi. Tanah berpasir sering dikenal sebagai tanah ringan karena proporsi pasirnya yang tinggi dan sedikit liat (tanah liat lebih berat daripada pasir).</item>
+        <item>Merupakan jenis tanah berat yang diuntungkan oleh unsur hara yang tinggi. Tanah liat tetap basah dan dingin di musim dingin dan mengering di musim panas.</item>
+        <item>Merupakan campuran pasir, debu dan liat yang digabungkan untuk menghindari pengaruh negatif dari masing-masing jenis.</item>
+    </string-array>
+
+    <string-array name="data_urlPhoto">
+        <item>https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1638871729/skmozguokxaoqjft2w68.png</item>
+        <item>https://asset-a.grid.id/crop/0x0:0x0/360x240/photo/2019/01/20/1244944216.jpg</item>
+        <item>https://cdn.pixabay.com/photo/2020/08/04/07/33/soil-5461894__480.jpg</item>
+    </string-array>
+
     <string name="app_name">NanamYuk</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_dashboard">Dashboard</string>
