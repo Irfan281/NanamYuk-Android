@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string-array name="data_nama_tanah">
         <item>Tanah berpasir</item>
         <item>Tanah liat</item>
@@ -14,7 +14,7 @@
     <string-array name="data_urlPhoto">
         <item>https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1638871729/skmozguokxaoqjft2w68.png</item>
         <item>https://asset-a.grid.id/crop/0x0:0x0/360x240/photo/2019/01/20/1244944216.jpg</item>
-        <item>https://cdn.pixabay.com/photo/2020/08/04/07/33/soil-5461894__480.jpg</item>
+        <item>https://avatars.githubusercontent.com/u/4090245?v=4</item>
     </string-array>
 
     <string name="app_name">NanamYuk</string>
