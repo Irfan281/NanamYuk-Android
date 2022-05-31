@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.databinding.ActivityLoginBinding
 import com.irfan.nanamyuk.ui.daftar.DaftarActivity
+import com.irfan.nanamyuk.ui.pilih.PilihActivity
 
 
 class LoginActivity : AppCompatActivity() {
