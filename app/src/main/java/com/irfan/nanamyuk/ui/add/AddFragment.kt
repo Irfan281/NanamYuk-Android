@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.irfan.nanamyuk.databinding.FragmentAddBinding
 import com.irfan.nanamyuk.ui.pilih.PilihActivity
+import com.irfan.nanamyuk.ui.rekomendasi.RekomendasiActivity
 
 class AddFragment : Fragment() {
 
