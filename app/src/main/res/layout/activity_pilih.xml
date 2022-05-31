@@ -54,4 +54,22 @@
         app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:listitem="@layout/item_plant" />
 
+    <Button
+        android:id="@+id/next_button"
+        style="@style/text.title"
+        android:elevation="10dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/button_next"
+        android:drawableEnd="@drawable/ic_arrow"
+        android:paddingEnd="8dp"
+        android:text="@string/lanjut"
+        android:textAlignment="viewEnd"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:ignore="RtlSymmetry" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

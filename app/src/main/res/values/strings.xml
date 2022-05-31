@@ -36,6 +36,6 @@
     <string name="logout">Keluar Akun</string>
     <string name="cari">Cari Tanaman</string>
     <string name="penanda_msg">Masukkan Nama Penanda</string>
-    <string name="pilih_msg">Silakan Pilih Tanaman Hasil Rekomendasi</string>
+    <string name="pilih_msg">Silakan Pilih Tanaman</string>
     <string name="hasil">Hasil Rekomendasi Tanaman</string>
 </resources>
