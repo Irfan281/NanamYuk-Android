@@ -10,11 +10,11 @@
         android:id="@+id/imagePlant"
         android:layout_width="match_parent"
         android:layout_height="238dp"
+        android:src="@drawable/bunga"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ImageContrastCheck"
-        tools:srcCompat="@tools:sample/avatars" />
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/plantTag"

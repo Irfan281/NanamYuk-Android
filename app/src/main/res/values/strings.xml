@@ -12,9 +12,9 @@
     </string-array>
 
     <string-array name="data_urlPhoto">
-        <item>https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,w_640/v1638871729/skmozguokxaoqjft2w68.png</item>
-        <item>https://asset-a.grid.id/crop/0x0:0x0/360x240/photo/2019/01/20/1244944216.jpg</item>
-        <item>https://avatars.githubusercontent.com/u/4090245?v=4</item>
+        <item>https://storage.googleapis.com/nanamyuk-bucket/download.jpg</item>
+        <item>https://storage.googleapis.com/nanamyuk-bucket/download.jpg</item>
+        <item>https://storage.googleapis.com/nanamyuk-bucket/download.jpg</item>
     </string-array>
 
     <string name="app_name">NanamYuk</string>
@@ -56,4 +56,5 @@
     <string name="penanda_msg">Masukkan Nama Penanda</string>
     <string name="pilih_msg">Silakan Pilih Tanaman</string>
     <string name="hasil">Hasil Rekomendasi Tanaman</string>
+    <string name="button">button</string>
 </resources>
