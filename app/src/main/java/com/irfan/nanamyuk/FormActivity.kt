@@ -21,6 +21,8 @@ class FormActivity : AppCompatActivity() {
     private val list = ArrayList<Tanah>()
     private lateinit var binding: ActivityFormBinding
 
+    private var namaTanah = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFormBinding.inflate(layoutInflater)
@@ -31,8 +33,6 @@ class FormActivity : AppCompatActivity() {
 
         list.addAll(listTanah)
 
-        Log.e("nnyuk", "$list")
-
         jenisTanah.layoutManager = LinearLayoutManager(this)
         val singleAdapter = TanahAdapter(this, list)
         jenisTanah.adapter = singleAdapter
@@ -41,14 +41,20 @@ class FormActivity : AppCompatActivity() {
             override fun onItemClick(view: View, position: Int) {
                 singleAdapter.setSelection(position)
 
+                namaTanah = singleAdapter.SingleViewHolder(view).mNamaTanah.text.toString()
+
                 Toast.makeText(this@FormActivity, singleAdapter.SingleViewHolder(view).mNamaTanah.text, Toast.LENGTH_SHORT).show()
             }
 
         })
 
         binding.nextButton.setOnClickListener {
-            val intent = Intent(this, PilihActivity::class.java)
-            startActivity(intent)
+            if(namaTanah.isNotEmpty()) {
+                val intent = Intent(this, PilihActivity::class.java)
+                startActivity(intent)
+            } else{
+                Toast.makeText(this@FormActivity, "Silakan pilih tanah terlebih dahulu", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
