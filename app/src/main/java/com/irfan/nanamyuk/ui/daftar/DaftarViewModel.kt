@@ -1,4 +1,4 @@
-package com.irfan.nanamyuk.ui.login
+package com.irfan.nanamyuk.ui.daftar
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,7 +12,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
+class DaftarViewModel(private val pref: SessionPreferences) : ViewModel() {
     private val _login = MutableLiveData<AuthResponse>()
     val login : LiveData<AuthResponse> = _login
 
@@ -25,11 +25,11 @@ class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
     private val _state = MutableLiveData<Boolean>()
     val state: LiveData<Boolean> = _state
 
-    fun postLogin(map : HashMap<String, String>) {
+    fun postDaftar(map : HashMap<String, String>) {
         _isLoading.value = true
         _state.value = false
 
-        val client = ConfigApi.getApiService().postLogin(map)
+        val client = ConfigApi.getApiService().postRegister(map)
         client.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 _isLoading.value = false

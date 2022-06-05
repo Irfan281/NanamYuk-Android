@@ -5,15 +5,26 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
+import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.R
+import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityDaftarBinding
 import com.irfan.nanamyuk.databinding.ActivityLoginBinding
+import com.irfan.nanamyuk.ui.ViewModelFactory
 import com.irfan.nanamyuk.ui.login.LoginActivity
+import com.irfan.nanamyuk.ui.login.LoginViewModel
+
+private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class DaftarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDaftarBinding
+    private lateinit var daftarViewModel: DaftarViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +42,44 @@ class DaftarActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        daftarViewModel = ViewModelProvider(this, ViewModelFactory(SessionPreferences.getInstance(dataStore)))[DaftarViewModel::class.java]
+
+
+        setupAction()
+    }
+
+    private fun setupAction(){
+        binding.btnDaftar.setOnClickListener {
+            val name = binding.nameEditText.text.toString()
+            val email = binding.emailEditText.text.toString()
+            val password = binding.passwordEditText.text.toString()
+
+            val map = hashMapOf(
+                "firstName" to name,
+                "lastName" to "",
+                "email" to email,
+                "password" to password
+            )
+
+            daftarViewModel.postDaftar(map)
+
+            daftarViewModel.state.observe(this) {
+                if (it) {
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
+        }
+
+        daftarViewModel.isLoading.observe(this, ::showLoading)
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.apply {
+            progress.visibility = if (isLoading) View.VISIBLE else View.GONE
+            card.visibility = if (!isLoading) View.VISIBLE else View.INVISIBLE
+        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
