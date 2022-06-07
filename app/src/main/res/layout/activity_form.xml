@@ -72,18 +72,57 @@
         app:layout_constraintTop_toBottomOf="@+id/rv_kota" />
 
     <TextView
+        android:id="@+id/rv_cahaya"
+        style="@style/text.title"
+        android:layout_width="52dp"
+        android:layout_height="17dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
+        android:text="Intensitas cahaya"
+        android:textColor="@color/text_main"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <RadioGroup
+        android:id="@+id/rg_cahaya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="@+id/rv_cahaya"
+        app:layout_constraintTop_toBottomOf="@+id/rv_cahaya">
+
+        <RadioButton
+            android:id="@+id/rb_langsung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cahaya langsung" />
+
+        <RadioButton
+            android:id="@+id/rb_tidak_langsung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cahaya tidak langsung" />
+    </RadioGroup>
+
+    <TextView
         android:id="@+id/rv_tanah"
         style="@style/text.title"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="25dp"
         android:text="Tanah"
         android:textColor="@color/text_main"
-        app:layout_constraintStart_toStartOf="@+id/rv_kota"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rg_cahaya" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/jenis_tanah"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="12dp"
         app:layout_constraintBottom_toTopOf="@+id/next_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
