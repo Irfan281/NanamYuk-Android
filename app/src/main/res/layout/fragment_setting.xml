@@ -16,7 +16,7 @@
         android:textColor="@color/text_main" />
 
     <LinearLayout
-        android:id="@+id/language"
+        android:id="@+id/logout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"

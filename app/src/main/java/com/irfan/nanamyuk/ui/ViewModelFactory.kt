@@ -7,6 +7,7 @@ import com.irfan.nanamyuk.ui.daftar.DaftarViewModel
 import com.irfan.nanamyuk.ui.dash.DashViewModel
 import com.irfan.nanamyuk.ui.login.LoginViewModel
 import com.irfan.nanamyuk.ui.pilih.PilihViewModel
+import com.irfan.nanamyuk.ui.setting.SettingViewModel
 
 class ViewModelFactory(private val pref: SessionPreferences) :
     ViewModelProvider.NewInstanceFactory() {
@@ -25,6 +26,9 @@ class ViewModelFactory(private val pref: SessionPreferences) :
             }
             modelClass.isAssignableFrom(DashViewModel::class.java) -> {
                 DashViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
+                SettingViewModel(pref) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

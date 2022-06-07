@@ -16,7 +16,6 @@ import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityLoginBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
 import com.irfan.nanamyuk.ui.daftar.DaftarActivity
-import com.irfan.nanamyuk.ui.pilih.PilihActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -29,12 +28,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        binding.btnLogin.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
 
         binding.btnDaftar.setOnClickListener {
             val intent = Intent(this, DaftarActivity::class.java)
