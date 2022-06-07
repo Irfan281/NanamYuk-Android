@@ -25,16 +25,16 @@ class RekomendasiActivity : AppCompatActivity() {
 
         createData()
 
-        binding.rvRekomendasi.layoutManager = LinearLayoutManager(this)
-        val singleAdapter = PilihAdapter(this, datas)
-        binding.rvRekomendasi.adapter = singleAdapter
-
-        singleAdapter.setOnItemClickLitener(object : PilihAdapter.OnItemClickListener {
-            override fun onItemClick(view: View, position: Int) {
-                singleAdapter.setSelection(position)
-            }
-
-        })
+//        binding.rvRekomendasi.layoutManager = LinearLayoutManager(this)
+//        val singleAdapter = PilihAdapter(this, datas)
+//        binding.rvRekomendasi.adapter = singleAdapter
+//
+//        singleAdapter.setOnItemClickLitener(object : PilihAdapter.OnItemClickListener {
+//            override fun onItemClick(view: View, position: Int) {
+//                singleAdapter.setSelection(position)
+//            }
+//
+//        })
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

@@ -9,10 +9,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.irfan.nanamyuk.R
+import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.databinding.ItemStatusBinding
 import com.irfan.nanamyuk.ui.detail.DetailActivity
 
-class UserPlantsAdapter(private val datas: List<String>) :
+class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
     RecyclerView.Adapter<UserPlantsAdapter.ViewHolder>(), View.OnClickListener {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
@@ -22,9 +23,13 @@ class UserPlantsAdapter(private val datas: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val name = datas[position]
+        val (namaPenanda, plant, date) = datas[position]
 
-        holder.binding.textView.text = name
+        Glide.with(holder.itemView).load(plant[0].image).into(holder.binding.circleImageView)
+        holder.binding.tvPenanda.text = namaPenanda
+        holder.binding.tvTanaman.text = plant[0].namaTanaman
+        holder.binding.tvDate.text = date
+
 
         holder.binding.card.setOnClickListener(this)
         holder.binding.fabWater.setOnClickListener(this)

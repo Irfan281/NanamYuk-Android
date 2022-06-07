@@ -12,9 +12,9 @@
     </string-array>
 
     <string-array name="data_urlPhoto">
-        <item>https://storage.googleapis.com/nanamyuk-bucket/download.jpg</item>
-        <item>https://storage.googleapis.com/nanamyuk-bucket/download.jpg</item>
-        <item>https://storage.googleapis.com/nanamyuk-bucket/download.jpg</item>
+        <item>https://storage.googleapis.com/nanamyuk-bucket/tanah/tanah-pasir.jpg</item>
+        <item>https://storage.googleapis.com/nanamyuk-bucket/tanah/tanah-liat.jpg</item>
+        <item>https://storage.googleapis.com/nanamyuk-bucket/tanah/tanah-lempung.jpg</item>
     </string-array>
 
     <string name="app_name">NanamYuk</string>

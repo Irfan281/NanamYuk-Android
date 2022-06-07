@@ -6,11 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.irfan.nanamyuk.R
+import com.irfan.nanamyuk.data.api.PlantResponseItem
 
-class PilihAdapter (context: Context, private var datas: List<String>) :
+class PilihAdapter (private var datas: List<PlantResponseItem>) :
     RecyclerView.Adapter<PilihAdapter.SingleViewHolder>() {
 
     private var selected = -1
@@ -38,13 +41,16 @@ class PilihAdapter (context: Context, private var datas: List<String>) :
     }
 
     override fun onBindViewHolder(holder: SingleViewHolder, position: Int) {
-        val name = datas[position]
+        val (name, url) = datas[position]
         holder.mTvName.text = name
+        Glide.with(holder.itemView).load(url).into(holder.image)
+
         if (selected == position) {
             holder.itemView.isSelected = true
         } else {
             holder.itemView.isSelected = false
         }
+
         if (onClick != null) {
             holder.itemView.setOnClickListener {
                 onClick!!.onItemClick(
@@ -63,6 +69,7 @@ class PilihAdapter (context: Context, private var datas: List<String>) :
 
     inner class SingleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mTvName: TextView = itemView.findViewById(R.id.tv_plant_name)
+        var image : ImageView = itemView.findViewById(R.id.circleImageView)
     }
 
 }

@@ -26,32 +26,32 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/tv_penanda"
             style="@style/text.title"
             android:layout_marginStart="16dp"
-            android:text="@string/nama_bunga"
+            android:text="@string/nama_penanda"
             android:textColor="@color/text_main"
-            app:layout_constraintBottom_toTopOf="@+id/textView2"
+            app:layout_constraintBottom_toTopOf="@+id/tv_tanaman"
             app:layout_constraintStart_toEndOf="@+id/circleImageView" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/tv_tanaman"
             style="@style/text.italic"
             android:layout_marginStart="16dp"
-            android:text="@string/nama_penanda"
+            android:text="@string/nama_bunga"
             android:textColor="@color/text_main"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/circleImageView"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/tv_date"
             style="@style/text.description"
             android:layout_marginStart="16dp"
             android:text="@string/date_1"
             android:textColor="@color/text_main"
             app:layout_constraintStart_toEndOf="@+id/circleImageView"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_tanaman" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fab_water"
