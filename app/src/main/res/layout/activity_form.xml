@@ -34,7 +34,7 @@
         style="@style/text.title"
         android:layout_height="40dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginBottom="70dp"
         android:background="@drawable/button_next"
         android:drawableEnd="@drawable/ic_arrow"
         android:paddingEnd="8dp"
@@ -122,9 +122,13 @@
         android:id="@+id/jenis_tanah"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/next_button"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_tanah" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_tanah"
+        app:layout_constraintVertical_bias="0.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
