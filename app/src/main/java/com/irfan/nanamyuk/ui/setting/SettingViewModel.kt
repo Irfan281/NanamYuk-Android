@@ -1,13 +1,16 @@
 package com.irfan.nanamyuk.ui.setting//package com.irfan.nanamyuk.ui.setting
-//
-//import androidx.lifecycle.LiveData
-//import androidx.lifecycle.MutableLiveData
-//import androidx.lifecycle.ViewModel
-//
-//class SettingViewModel : ViewModel() {
-//
-//    private val _text = MutableLiveData<String>().apply {
-//        value = "This is setting Fragment"
-//    }
-//    val text: LiveData<String> = _text
-//}
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.irfan.nanamyuk.data.datastore.SessionPreferences
+import kotlinx.coroutines.launch
+
+class SettingViewModel(private val pref: SessionPreferences) : ViewModel() {
+    fun logout() {
+        viewModelScope.launch {
+            pref.logout()
+        }
+    }
+}
