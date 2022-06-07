@@ -21,7 +21,11 @@ class FormActivity : AppCompatActivity() {
     private val list = ArrayList<Tanah>()
     private lateinit var binding: ActivityFormBinding
 
+    private var namaKota = ""
+    private var intensitasCahaya = ""
     private var namaTanah = ""
+
+    private var addMethodCahayaID = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,11 +53,34 @@ class FormActivity : AppCompatActivity() {
         })
 
         binding.nextButton.setOnClickListener {
-            if(namaTanah.isNotEmpty()) {
+            namaKota = binding.editTextKota.text.toString()
+
+            pilihIntensitas()
+            if(namaTanah.isNotEmpty() and namaKota.isNotEmpty() and intensitasCahaya.isNotEmpty()) {
                 val intent = Intent(this, PilihActivity::class.java)
                 startActivity(intent)
-            } else{
+            } else if(namaKota.isEmpty()){
+                Toast.makeText(this@FormActivity, "Silakan pilih kota terlebih dahulu", Toast.LENGTH_SHORT).show()
+            } else if(intensitasCahaya.isEmpty()){
+                Toast.makeText(this@FormActivity, "Silakan intensitas cahaya terlebih dahulu", Toast.LENGTH_SHORT).show()
+            } else if(namaTanah.isEmpty()){
                 Toast.makeText(this@FormActivity, "Silakan pilih tanah terlebih dahulu", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun pilihIntensitas() {
+        val addMethodCahaya = binding.rgCahaya.checkedRadioButtonId
+
+        if(addMethodCahaya != -1) {
+            addMethodCahayaID = resources.getResourceEntryName(addMethodCahaya)
+        }
+
+        when(addMethodCahayaID){
+            "rb_langsung" -> {
+                intensitasCahaya = binding.rbLangsung.text.toString()
+            }"rb_tidak_langsung" -> {
+                intensitasCahaya = binding.rbTidakLangsung.text.toString()
             }
         }
     }
