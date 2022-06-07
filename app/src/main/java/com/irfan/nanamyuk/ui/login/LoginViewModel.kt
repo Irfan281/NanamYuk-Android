@@ -37,7 +37,11 @@ class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
                     _state.value = true
 
                     viewModelScope.launch {
-                        response.body()?.token?.let { pref.login(it) }
+                        val token = response.body()?.token
+                        val name = response.body()?.user?.firstName
+                        if (token != null && name != null) {
+                            pref.login(token, name)
+                        }
                     }
                 }
             }
