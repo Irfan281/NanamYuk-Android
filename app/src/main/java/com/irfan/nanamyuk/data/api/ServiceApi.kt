@@ -20,8 +20,32 @@ interface ServiceApi {
         @Header("Authorization") header: String
     ) : Call<List<PlantResponseItem>>
 
+    @GET("Plant/{id}")
+    fun getPlantById(
+        @Header("Authorization") header: String,
+        @Path("id") id: String
+    ) : Call<PlantResponseItem>
+
     @GET("UserPlants?\$lookup=*")
     fun getUserPlants(
         @Header("Authorization") header: String,
     ) : Call<List<UserPlantsResponseItem>>
+
+    @POST("UserPlants")
+    fun postUserPlants(
+        @Header("Authorization") header: String,
+        @Body params: HashMap<String, Any>
+    ) : Call<UserPlantsResponseItem>
+
+    @POST("auth/logout")
+    fun logout(
+        @Header("Authorization") header: String,
+    ) : Call<AuthResponse>
+
+    @PATCH("UserPlants/{id}")
+    fun updateUserPlants(
+        @Header("Authorization") header: String,
+        @Path("id") id: String,
+        @Body params: HashMap<String, Any>
+    ): Call<UserPlantsResponseItem>
 }

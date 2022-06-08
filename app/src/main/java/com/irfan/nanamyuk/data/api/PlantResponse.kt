@@ -37,5 +37,8 @@ data class PlantResponseItem(
 	val kelembapan: String,
 
 	@field:SerializedName("Rainfall")
-	val rainfall: String
+	val rainfall: String,
+
+	@field:SerializedName("Tutorial")
+	val tutorial: String
 )

@@ -1,26 +1,35 @@
 package com.irfan.nanamyuk.ui.pilih
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.adapter.PilihAdapter
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityPilihBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
+import com.irfan.nanamyuk.ui.dash.DashFragment
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class PilihActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPilihBinding
     private lateinit var pilihViewModel: PilihViewModel
+
+    private var tanamanId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +40,7 @@ class PilihActivity : AppCompatActivity() {
         setupAction()
     }
 
+    @SuppressLint("NewApi")
     private fun setupAction() {
         pilihViewModel.getUserToken().observe(this) {
             pilihViewModel.getPlants(it.token)
@@ -45,6 +55,9 @@ class PilihActivity : AppCompatActivity() {
 
             adapter.setOnItemClickLitener(object : PilihAdapter.OnItemClickListener {
                 override fun onItemClick(view: View, position: Int) {
+
+                    tanamanId = adapter.SingleViewHolder(view).mTvId.text.toString()
+
                     adapter.setSelection(position)
                 }
             })
@@ -52,6 +65,38 @@ class PilihActivity : AppCompatActivity() {
 
         pilihViewModel.isLoading.observe(this) { isLoading ->
             binding.progress.visibility = if (isLoading) View.VISIBLE else View.GONE
+        }
+
+        binding.nextButton.setOnClickListener {
+            pilihViewModel.getUserToken().observe(this) {
+                val current = LocalDateTime.now()
+                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+                val date = current.format(formatter)
+                val namaPenanda = binding.tvPenanda.text.toString()
+                val user = listOf(it.id)
+                val plant = listOf(tanamanId)
+                val state = false
+
+                val map = hashMapOf(
+                    "Date" to date,
+                    "Nama Penanda" to namaPenanda,
+                    "User" to user,
+                    "Plant" to plant,
+                    "State" to state
+                )
+
+                if (namaPenanda.isNotEmpty()){
+                    pilihViewModel.postUserPlants(it.token, map)
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+
+                } else {
+                    Toast.makeText(this, "Isi Terlebih Dahulu Nama Penanda", Toast.LENGTH_SHORT).show()
+                }
+
+            }
         }
 
 

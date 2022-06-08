@@ -12,15 +12,17 @@ class SessionPreferences private constructor(private val dataStore: DataStore<Pr
         return dataStore.data.map { preferences ->
             SessionModel(
                 preferences[TOKEN] ?: "",
-                preferences[NAME] ?: ""
+                preferences[NAME] ?: "",
+                preferences[ID] ?: ""
             )
         }
     }
 
-    suspend fun login(token: String, name: String) {
+    suspend fun login(token: String, name: String, id: String) {
         dataStore.edit { preferences ->
             preferences[TOKEN] = token
             preferences[NAME] = name
+            preferences[ID] = id
         }
     }
 
@@ -36,6 +38,7 @@ class SessionPreferences private constructor(private val dataStore: DataStore<Pr
 
         private val TOKEN = stringPreferencesKey("token")
         private val NAME = stringPreferencesKey("name")
+        private val ID = stringPreferencesKey("id")
 
         fun getInstance(dataStore: DataStore<Preferences>): SessionPreferences {
             return INSTANCE ?: synchronized(this) {

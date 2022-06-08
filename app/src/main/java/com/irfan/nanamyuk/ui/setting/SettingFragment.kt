@@ -41,12 +41,20 @@ class SettingFragment : Fragment() {
         settingViewModel = ViewModelProvider(this, ViewModelFactory(SessionPreferences.getInstance(requireContext().dataStore)))[SettingViewModel::class.java]
 
         binding.logout.setOnClickListener {
-            settingViewModel.logout()
 
-            val intent = Intent(activity, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            Toast.makeText(activity, "Anda berhasil logout!", Toast.LENGTH_SHORT).show()
+            settingViewModel.getUserToken().observe(viewLifecycleOwner) {
+                settingViewModel.logout(it.token)
+            }
+
+            settingViewModel.state.observe(viewLifecycleOwner) {
+                if (it == true){
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    Toast.makeText(activity, "Anda berhasil logout!", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         }
     }
 

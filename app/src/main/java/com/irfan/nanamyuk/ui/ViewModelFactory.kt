@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.ui.daftar.DaftarViewModel
 import com.irfan.nanamyuk.ui.dash.DashViewModel
+import com.irfan.nanamyuk.ui.detail.DetailViewModel
 import com.irfan.nanamyuk.ui.login.LoginViewModel
 import com.irfan.nanamyuk.ui.pilih.PilihViewModel
 import com.irfan.nanamyuk.ui.setting.SettingViewModel
@@ -29,6 +30,9 @@ class ViewModelFactory(private val pref: SessionPreferences) :
             }
             modelClass.isAssignableFrom(SettingViewModel::class.java) -> {
                 SettingViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
+                DetailViewModel(pref) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

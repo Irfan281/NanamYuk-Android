@@ -16,6 +16,17 @@ import com.irfan.nanamyuk.ui.detail.DetailActivity
 class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
     RecyclerView.Adapter<UserPlantsAdapter.ViewHolder>(), View.OnClickListener {
 
+    companion object {
+        const val ID = "id"
+        const val NAME = "name"
+    }
+
+    private var onClick: OnItemClickListener? = null
+
+    fun setOnItemClickLitener(mOnItemClickListener: UserPlantsAdapter.OnItemClickListener) {
+        this.onClick = mOnItemClickListener
+    }
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val binding =
             ItemStatusBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, false)
@@ -23,16 +34,40 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (namaPenanda, plant, date) = datas[position]
+        val (namaPenanda, plant, date, state, id) = datas[position]
+
+        if (state) {
+            holder.binding.fabWater.visibility = View.GONE
+            holder.binding.check.visibility = View.VISIBLE
+        }
 
         Glide.with(holder.itemView).load(plant[0].image).into(holder.binding.circleImageView)
         holder.binding.tvPenanda.text = namaPenanda
         holder.binding.tvTanaman.text = plant[0].namaTanaman
         holder.binding.tvDate.text = date
 
+        holder.binding.card.setOnClickListener {
+            val i = Intent(holder.itemView.context, DetailActivity::class.java)
+            i.putExtra(ID, plant[0].id)
+            i.putExtra(NAME, namaPenanda)
+            holder.itemView.context.startActivity(i)
+        }
 
-        holder.binding.card.setOnClickListener(this)
-        holder.binding.fabWater.setOnClickListener(this)
+        //holder.binding.fabWater.setOnClickListener(this)
+
+        if (onClick != null) {
+            holder.binding.fabWater.setOnClickListener {
+                onClick!!.onItemClick(
+                    holder.binding.fabWater,
+                    holder.adapterPosition,
+                    id
+                )
+            }
+        }
+    }
+
+    interface OnItemClickListener {
+        fun onItemClick(view: View, position: Int, id:String)
     }
 
     override fun getItemCount(): Int = datas.size
@@ -44,10 +79,11 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
             R.id.fab_water -> {
                 Toast.makeText(view.context, "Ini tombol water", Toast.LENGTH_SHORT).show()
             }R.id.card -> {
-                val i = Intent(view.context, DetailActivity::class.java)
-                view.context.startActivity(i)
+
             }
         }
     }
+
+
 
 }

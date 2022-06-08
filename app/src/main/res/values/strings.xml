@@ -24,7 +24,7 @@
     <string name="title_setting">Pengaturan</string>
     <string name="blob">blob</string>
     <string name="tambah_tanaman">Tambah Tanaman</string>
-    <string name="halo">Halo, Nama</string>
+    <string name="halo">Halo, Muhammad Irfan</string>
     <string name="name">Muhammad Irfan</string>
     <string name="date">Rabu, 25 Mei 2022</string>
     <string name="nama_bunga">Nama Bunga</string>
@@ -57,4 +57,7 @@
     <string name="pilih_msg">Silakan Pilih Tanaman</string>
     <string name="hasil">Hasil Rekomendasi Tanaman</string>
     <string name="button">button</string>
+    <string name="penanda">Masukkan Nama Penanda</string>
+    <string name="penanda_msg_2">Misal, Bayam Halaman Belakang</string>
+    <string name="chekclist">chekclist</string>
 </resources>

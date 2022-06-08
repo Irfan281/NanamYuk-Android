@@ -22,6 +22,9 @@ class DashViewModel(private val pref: SessionPreferences) : ViewModel() {
         return pref.getToken().asLiveData()
     }
 
+    private val _state = MutableLiveData<Boolean>()
+    val state: LiveData<Boolean> = _state
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
     
@@ -46,8 +49,30 @@ class DashViewModel(private val pref: SessionPreferences) : ViewModel() {
         })
     }
 
+    fun updateUserPlants(token: String, map : HashMap<String, Any>, id: String){
+        _state.value = false
+
+        val client = ConfigApi.getApiService().updateUserPlants("Bearer $token", id, map)
+        client.enqueue(object : Callback<UserPlantsResponseItem> {
+            override fun onResponse(
+                call: Call<UserPlantsResponseItem>,
+                response: Response<UserPlantsResponseItem>
+            ) {
+                if (response.isSuccessful){
+                    _state.value = true
+
+                }
+            }
+
+            override fun onFailure(call: Call<UserPlantsResponseItem>, t: Throwable) {
+                Log.e(TAG, "onFailure Throw: ${t.message}")
+            }
+
+        })
+    }
+
     companion object {
-        private const val TAG = "PilihViewModel"
+        private const val TAG = "DashViewModel"
     }
 
 }

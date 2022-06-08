@@ -41,9 +41,10 @@ class PilihAdapter (private var datas: List<PlantResponseItem>) :
     }
 
     override fun onBindViewHolder(holder: SingleViewHolder, position: Int) {
-        val (name, url) = datas[position]
+        val (name, url, id) = datas[position]
         holder.mTvName.text = name
         Glide.with(holder.itemView).load(url).into(holder.image)
+        holder.mTvId.text = id
 
         if (selected == position) {
             holder.itemView.isSelected = true
@@ -69,6 +70,7 @@ class PilihAdapter (private var datas: List<PlantResponseItem>) :
 
     inner class SingleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var mTvName: TextView = itemView.findViewById(R.id.tv_plant_name)
+        var mTvId: TextView = itemView.findViewById(R.id.id)
         var image : ImageView = itemView.findViewById(R.id.circleImageView)
     }
 

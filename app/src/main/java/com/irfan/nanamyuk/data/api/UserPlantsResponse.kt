@@ -19,14 +19,16 @@ data class UserPlantsResponseItem(
 	@field:SerializedName("Date")
 	val date: String,
 
-	@field:SerializedName("User")
-	val user: List<UserItem>,
-
 	@field:SerializedName("State")
 	val state: Boolean,
 
 	@field:SerializedName("_id")
-	val id: String
+	val id: String,
+
+	@field:SerializedName("User")
+	val user: List<UserItem>
+
+
 )
 
 data class PlantItem(

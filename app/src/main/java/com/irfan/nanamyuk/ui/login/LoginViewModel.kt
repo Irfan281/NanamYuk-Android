@@ -19,9 +19,6 @@ class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _responseStatus = MutableLiveData<String>()
-    val responseStatus: LiveData<String> = _responseStatus
-
     private val _state = MutableLiveData<Boolean>()
     val state: LiveData<Boolean> = _state
 
@@ -39,8 +36,10 @@ class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
                     viewModelScope.launch {
                         val token = response.body()?.token
                         val name = response.body()?.user?.firstName
-                        if (token != null && name != null) {
-                            pref.login(token, name)
+                        val id = response.body()?.userId
+
+                        if (token != null && name != null && id != null) {
+                            pref.login(token, name, id)
                         }
                     }
                 }

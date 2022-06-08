@@ -39,9 +39,10 @@ class DaftarViewModel(private val pref: SessionPreferences) : ViewModel() {
                     viewModelScope.launch {
                         val token = response.body()?.token
                         val name = response.body()?.user?.firstName
+                        val id = response.body()?.userId
 
-                        if (token != null && name != null) {
-                            pref.login(token, name)
+                        if (token != null && name != null && id != null) {
+                            pref.login(token, name, id)
                         }
                     }
                 }
