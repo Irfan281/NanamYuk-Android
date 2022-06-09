@@ -2,19 +2,25 @@ package com.irfan.nanamyuk.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.irfan.nanamyuk.R
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.databinding.ItemStatusBinding
 import com.irfan.nanamyuk.ui.detail.DetailActivity
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
-    RecyclerView.Adapter<UserPlantsAdapter.ViewHolder>(), View.OnClickListener {
+    RecyclerView.Adapter<UserPlantsAdapter.ViewHolder>() {
 
     companion object {
         const val ID = "id"
@@ -46,14 +52,12 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
         holder.binding.tvTanaman.text = plant[0].namaTanaman
         holder.binding.tvDate.text = date
 
-        holder.binding.card.setOnClickListener {
-            val i = Intent(holder.itemView.context, DetailActivity::class.java)
-            i.putExtra(ID, plant[0].id)
-            i.putExtra(NAME, namaPenanda)
-            holder.itemView.context.startActivity(i)
-        }
-
-        //holder.binding.fabWater.setOnClickListener(this)
+//        holder.binding.card.setOnClickListener {
+//            val i = Intent(holder.itemView.context, DetailActivity::class.java)
+//            i.putExtra(ID, plant[0].id)
+//            i.putExtra(NAME, namaPenanda)
+//            holder.itemView.context.startActivity(i)
+//        }
 
         if (onClick != null) {
             holder.binding.fabWater.setOnClickListener {
@@ -66,6 +70,13 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
         }
     }
 
+    private fun formatDate(currentDateString: String): String {
+        val instant = Instant.parse(currentDateString)
+        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy | HH:mm")
+            .withZone(ZoneId.of(TimeZone.getDefault().id))
+        return formatter.format(instant)
+    }
+
     interface OnItemClickListener {
         fun onItemClick(view: View, position: Int, id:String)
     }
@@ -73,17 +84,4 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
     override fun getItemCount(): Int = datas.size
 
     inner class ViewHolder(var binding: ItemStatusBinding) : RecyclerView.ViewHolder(binding.root)
-
-    override fun onClick(view: View) {
-        when(view.id){
-            R.id.fab_water -> {
-                Toast.makeText(view.context, "Ini tombol water", Toast.LENGTH_SHORT).show()
-            }R.id.card -> {
-
-            }
-        }
-    }
-
-
-
 }

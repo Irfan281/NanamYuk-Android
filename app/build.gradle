@@ -24,6 +24,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled = true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -65,6 +66,8 @@ dependencies {
     //Viewmodel + Livedata
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.4.1"
+
+    coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:1.1.5"
     
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

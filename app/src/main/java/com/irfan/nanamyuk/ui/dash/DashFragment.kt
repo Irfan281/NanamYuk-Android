@@ -2,6 +2,7 @@ package com.irfan.nanamyuk.ui.dash
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
@@ -33,6 +35,8 @@ class DashFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private lateinit var dashViewModel: DashViewModel
+    private lateinit var adapterNotFinish: UserPlantsAdapter
+    private lateinit var adapterFinish: UserPlantsAdapter
 
     private var token = ""
 
@@ -87,23 +91,24 @@ class DashFragment : Fragment() {
                 }
             }
             binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
-            val adapterNotFinish = UserPlantsAdapter(notFinish)
+            adapterNotFinish = UserPlantsAdapter(notFinish)
             binding.rvNotFinish.adapter = adapterNotFinish
 
             binding.rvFinish.layoutManager = LinearLayoutManager(activity)
-            val adapterFinish = UserPlantsAdapter(finish)
+            adapterFinish = UserPlantsAdapter(finish)
             binding.rvFinish.adapter = adapterFinish
 
+            val map = hashMapOf<String, Any>(
+                "State" to true
+            )
+
             adapterNotFinish.setOnItemClickLitener(object  : UserPlantsAdapter.OnItemClickListener {
-                @SuppressLint("NotifyDataSetChanged")
                 override fun onItemClick(view: View, position: Int, id: String) {
-                    val map = hashMapOf<String, Any>(
-                        "State" to true
-                    )
                     dashViewModel.updateUserPlants(token, map, id)
 
-
-                    Toast.makeText(activity, "ini fab waterr", Toast.LENGTH_SHORT).show()
+                    val i = Intent(activity, HomeActivity::class.java)
+                    i.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(i)
                 }
 
             })
@@ -112,9 +117,9 @@ class DashFragment : Fragment() {
         dashViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progress.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
-
-
     }
+
+
 
     private fun setupViewModel(){
         dashViewModel = ViewModelProvider(this, ViewModelFactory(SessionPreferences.getInstance(requireContext().dataStore)))[DashViewModel::class.java]
