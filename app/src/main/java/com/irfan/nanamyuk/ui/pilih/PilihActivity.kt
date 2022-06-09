@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -21,8 +22,11 @@ import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityPilihBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
 import com.irfan.nanamyuk.ui.add.AddFragment
+import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -45,11 +49,12 @@ class PilihActivity : AppCompatActivity() {
         setupAction(method)
     }
 
+
     @SuppressLint("NewApi")
     private fun setupAction(method: String) {
         val layoutManager = LinearLayoutManager(this)
         binding.rvPlant.layoutManager = layoutManager
-
+      
         pilihViewModel.getUserToken().observe(this) {
             pilihViewModel.getPlants(it.token)
         }
@@ -80,12 +85,17 @@ class PilihActivity : AppCompatActivity() {
             binding.progress.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
+            val current = LocalDateTime.now()
+            val tambah = current.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) + " Asia/Jakarta"
+            val pattern = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss z")
+            val format = ZonedDateTime.parse(tambah, pattern).toString().split("+")
+
+            val date = format[0] + "Z"
+            Log.e("tes convert", date)
+
         binding.nextButton.setOnClickListener {
             pilihViewModel.getUserToken().observe(this) {
-                val current = LocalDateTime.now()
-                val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
 
-                val date = current.format(formatter)
                 val namaPenanda = binding.tvPenanda.text.toString()
                 val user = listOf(it.id)
                 val plant = listOf(tanamanId)
