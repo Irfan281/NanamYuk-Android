@@ -3,23 +3,24 @@ package com.irfan.nanamyuk.ui.pilih
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.irfan.nanamyuk.FormActivity
 import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.adapter.PilihAdapter
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityPilihBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
-import com.irfan.nanamyuk.ui.dash.DashFragment
+import com.irfan.nanamyuk.ui.add.AddFragment
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -29,6 +30,8 @@ class PilihActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPilihBinding
     private lateinit var pilihViewModel: PilihViewModel
 
+    private lateinit var adapter: PilihAdapter
+
     private var tanamanId = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,31 +39,41 @@ class PilihActivity : AppCompatActivity() {
         binding = ActivityPilihBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val method = intent.extras?.get(METHOD).toString()
+
         setupViewModel()
-        setupAction()
+        setupAction(method)
     }
 
     @SuppressLint("NewApi")
-    private fun setupAction() {
+    private fun setupAction(method: String) {
+        val layoutManager = LinearLayoutManager(this)
+        binding.rvPlant.layoutManager = layoutManager
+
         pilihViewModel.getUserToken().observe(this) {
             pilihViewModel.getPlants(it.token)
         }
 
         pilihViewModel.plants.observe(this) { plants ->
-            val layoutManager = LinearLayoutManager(this)
-            binding.rvPlant.layoutManager = layoutManager
+            when(method) {
+                "rekomendasi" -> {
 
-            val adapter = PilihAdapter(plants)
-            binding.rvPlant.adapter = adapter
-
-            adapter.setOnItemClickLitener(object : PilihAdapter.OnItemClickListener {
-                override fun onItemClick(view: View, position: Int) {
-
-                    tanamanId = adapter.SingleViewHolder(view).mTvId.text.toString()
-
-                    adapter.setSelection(position)
                 }
-            })
+                "pilih" -> {
+                    adapter = PilihAdapter(plants)
+
+                    binding.rvPlant.adapter = adapter
+
+                    adapter.setOnItemClickLitener(object : PilihAdapter.OnItemClickListener {
+                        override fun onItemClick(view: View, position: Int) {
+
+                            tanamanId = adapter.SingleViewHolder(view).mTvId.text.toString()
+
+                            adapter.setSelection(position)
+                        }
+                    })
+                }
+            }
         }
 
         pilihViewModel.isLoading.observe(this) { isLoading ->
@@ -114,5 +127,9 @@ class PilihActivity : AppCompatActivity() {
             closeKeyboard.hideSoftInputFromWindow(it.windowToken, 0)
         }
         return super.dispatchTouchEvent(ev)
+    }
+
+    companion object {
+        const val METHOD = "method"
     }
 }

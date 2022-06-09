@@ -13,7 +13,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter
@@ -22,9 +21,6 @@ import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
 import java.text.SimpleDateFormat
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -59,11 +55,6 @@ class DashFragment : Fragment() {
     @SuppressLint("SetTextI18n", "SimpleDateFormat")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAction() {
-        val current = LocalDateTime.now()
-
-        val formatter = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.SHORT)
-        val formatted = current.format(formatter)
-
         val calendar = Calendar.getInstance()
         val date = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault())
 
