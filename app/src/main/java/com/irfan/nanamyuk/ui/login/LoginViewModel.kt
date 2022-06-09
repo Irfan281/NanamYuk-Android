@@ -1,9 +1,11 @@
 package com.irfan.nanamyuk.ui.login
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.irfan.nanamyuk.data.api.AuthResponse
 import com.irfan.nanamyuk.data.api.ConfigApi
-import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import kotlinx.coroutines.launch
 import retrofit2.Call
@@ -19,10 +21,6 @@ class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
 
     private val _state = MutableLiveData<Boolean>()
     val state: LiveData<Boolean> = _state
-
-    fun getUserToken(): LiveData<SessionModel> {
-        return pref.getToken().asLiveData()
-    }
 
     fun postLogin(map : HashMap<String, String>) {
         _isLoading.value = true
