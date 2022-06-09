@@ -1,13 +1,11 @@
 package com.irfan.nanamyuk.ui.pilih
 
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.irfan.nanamyuk.data.api.ConfigApi
-import com.irfan.nanamyuk.data.api.PlantResponse
 import com.irfan.nanamyuk.data.api.PlantResponseItem
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionModel
