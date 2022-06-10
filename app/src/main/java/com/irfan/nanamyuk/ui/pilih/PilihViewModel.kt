@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.irfan.nanamyuk.data.api.ConfigApi
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.api.PlantResponseItem
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionModel
@@ -31,7 +32,7 @@ class PilihViewModel(private val pref: SessionPreferences): ViewModel() {
     fun getPlants(token: String){
         _isLoading.value = true
 
-        val client = ConfigApi.getApiService().getPlant("Bearer $token")
+        val client = ConfigApi.getApiService(BASE_URL).getPlant("Bearer $token")
         client.enqueue(object : Callback<List<PlantResponseItem>> {
             override fun onResponse(call: Call<List<PlantResponseItem>>, response: Response<List<PlantResponseItem>>) {
                 _isLoading.value = false
@@ -52,7 +53,7 @@ class PilihViewModel(private val pref: SessionPreferences): ViewModel() {
     fun postUserPlants(token: String, map : HashMap<String, Any>){
         _state.value = false
 
-        val client = ConfigApi.getApiService().postUserPlants("Bearer $token", map)
+        val client = ConfigApi.getApiService(BASE_URL).postUserPlants("Bearer $token", map)
         client.enqueue(object : Callback<UserPlantsResponseItem> {
             override fun onResponse(
                 call: Call<UserPlantsResponseItem>,

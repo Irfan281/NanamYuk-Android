@@ -7,9 +7,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ConfigApi {
     companion object {
-        private var BASE_URL: String = "https://api.kontenbase.com/query/api/v1/32f30ee3-198c-4936-84d4-c21e1b38927c/"
 
-        fun getApiService(): ServiceApi {
+        var BASE_URL: String = "https://api.kontenbase.com/query/api/v1/32f30ee3-198c-4936-84d4-c21e1b38927c/"
+        var BASE_ML: String = "https://nanamyuk-g5ck3ypmca-as.a.run.app/"
+
+        fun getApiService(url: String): ServiceApi {
             val loggingInterceptor =
                 HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder()
@@ -17,7 +19,7 @@ class ConfigApi {
                 .build()
             val retrofit =
                 Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(url)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client)
                     .build()

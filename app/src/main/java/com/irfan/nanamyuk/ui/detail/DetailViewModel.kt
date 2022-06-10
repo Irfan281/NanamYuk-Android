@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.irfan.nanamyuk.data.api.ConfigApi
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.api.PlantResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
@@ -27,7 +28,7 @@ class DetailViewModel(private val pref: SessionPreferences) : ViewModel() {
     fun getPlants(token: String, id: String){
         _isLoading.value = true
 
-        val client = ConfigApi.getApiService().getPlantById("Bearer $token", id)
+        val client = ConfigApi.getApiService(BASE_URL).getPlantById("Bearer $token", id)
         client.enqueue(object : Callback<PlantResponseItem> {
             override fun onResponse(call: Call<PlantResponseItem>, response: Response<PlantResponseItem>) {
                 _isLoading.value = false

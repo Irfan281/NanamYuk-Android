@@ -5,10 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -22,7 +22,13 @@ import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
+import kotlinx.datetime.*
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
 import java.util.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
@@ -47,28 +53,30 @@ class DashFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setupViewModel()
-        setupAction()
-
-    }
-
-    @SuppressLint("SetTextI18n", "SimpleDateFormat")
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setupAction() {
-        val calendar = Calendar.getInstance()
-        val date = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault())
-
-        binding.tvDate.text = date.format(calendar.time)
 
         dashViewModel.getUserToken().observe(viewLifecycleOwner) {
             binding.tvHalo.text = "Halo, " + it.name
             dashViewModel.getUserPlants(it.token)
             token = it.token
         }
+
+        setupAction()
+
+    }
+
+    @SuppressLint("SetTextI18n", "SimpleDateFormat", "NotifyDataSetChanged")
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun setupAction() {
+        val calendar = Calendar.getInstance()
+        val date = SimpleDateFormat("EEEE, dd MMM yyyy", Locale.getDefault())
+
+        binding.tvDate.text = date.format(calendar.time)
 
         dashViewModel.userplants.observe(viewLifecycleOwner) { UserPlants ->
             val notFinish = mutableListOf<UserPlantsResponseItem>()
@@ -81,20 +89,29 @@ class DashFragment : Fragment() {
                     notFinish.add(i)
                 }
             }
-            binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
-            adapterNotFinish = UserPlantsAdapter(notFinish)
-            binding.rvNotFinish.adapter = adapterNotFinish
 
-            binding.rvFinish.layoutManager = LinearLayoutManager(activity)
-            adapterFinish = UserPlantsAdapter(finish)
-            binding.rvFinish.adapter = adapterFinish
+            if (UserPlants.isNotEmpty()){
+                binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
+                adapterNotFinish = UserPlantsAdapter(notFinish)
+                binding.rvNotFinish.adapter = adapterNotFinish
 
-            val map = hashMapOf<String, Any>(
-                "State" to true
-            )
+                binding.rvFinish.layoutManager = LinearLayoutManager(activity)
+                adapterFinish = UserPlantsAdapter(finish)
+                binding.rvFinish.adapter = adapterFinish
+            }
+
+            adapterFinish.notifyDataSetChanged()
+            adapterNotFinish.notifyDataSetChanged()
+
+
 
             adapterNotFinish.setOnItemClickLitener(object  : UserPlantsAdapter.OnItemClickListener {
-                override fun onItemClick(view: View, position: Int, id: String) {
+                override fun onItemClick(view: View, position: Int, id: String, date: String) {
+                    val map = hashMapOf<String, Any>(
+                        "State" to true,
+                        "Date" to setTanggal(date)
+                    )
+
                     dashViewModel.updateUserPlants(token, map, id)
 
                     val i = Intent(activity, HomeActivity::class.java)
@@ -110,6 +127,33 @@ class DashFragment : Fragment() {
         }
     }
 
+    private fun setTanggal(date: String): String {
+        val hour = formatDate(date, "H").toInt()
+        var h = 0
+
+        val timeZone = TimeZone.of("UTC")
+        var next: LocalDateTime = Clock.System.now().toLocalDateTime(timeZone)
+
+        val d = LocalDateTime.parse(date.replace("Z", ""))
+        val instant = d.toInstant(timeZone)
+
+        return if (hour == 8) {
+            instant.toString().replace("08", "17") + ":00.000Z"
+        } else {
+
+            val instantOneDayLater = instant.plus(1, DateTimeUnit.DAY, timeZone)
+            next = instantOneDayLater.toLocalDateTime(timeZone)
+
+            next.toString().replace("17", "08") + ":00.000Z"
+        }
+    }
+
+    fun formatDate(currentDateString: String, pattern: String): String {
+        val instant = Instant.parse(currentDateString)
+        val formatter = DateTimeFormatter.ofPattern(pattern)
+            .withZone(ZoneId.of("UTC"))
+        return formatter.format(instant)
+    }
 
 
     private fun setupViewModel(){

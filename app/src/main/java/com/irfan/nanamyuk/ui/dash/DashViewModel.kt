@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.irfan.nanamyuk.data.api.ConfigApi
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
@@ -31,7 +32,7 @@ class DashViewModel(private val pref: SessionPreferences) : ViewModel() {
     fun getUserPlants(token: String) {
         _isLoading.value = true
 
-        val client = ConfigApi.getApiService().getUserPlants("Bearer $token")
+        val client = ConfigApi.getApiService(BASE_URL).getUserPlants("Bearer $token")
         client.enqueue(object : Callback<List<UserPlantsResponseItem>> {
             override fun onResponse(call: Call<List<UserPlantsResponseItem>>, response: Response<List<UserPlantsResponseItem>>) {
                 _isLoading.value = false
@@ -52,7 +53,7 @@ class DashViewModel(private val pref: SessionPreferences) : ViewModel() {
     fun updateUserPlants(token: String, map : HashMap<String, Any>, id: String){
         _state.value = false
 
-        val client = ConfigApi.getApiService().updateUserPlants("Bearer $token", id, map)
+        val client = ConfigApi.getApiService(BASE_URL).updateUserPlants("Bearer $token", id, map)
         client.enqueue(object : Callback<UserPlantsResponseItem> {
             override fun onResponse(
                 call: Call<UserPlantsResponseItem>,

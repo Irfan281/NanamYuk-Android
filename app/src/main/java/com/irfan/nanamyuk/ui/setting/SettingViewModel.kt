@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.irfan.nanamyuk.data.api.AuthResponse
 import com.irfan.nanamyuk.data.api.ConfigApi
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.ui.pilih.PilihViewModel
@@ -27,7 +28,7 @@ class SettingViewModel(private val pref: SessionPreferences) : ViewModel() {
             pref.logout()
         }
 
-        val client = ConfigApi.getApiService().logout("Bearer $token")
+        val client = ConfigApi.getApiService(BASE_URL).logout("Bearer $token")
         client.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 if (response.isSuccessful) {
