@@ -24,6 +24,7 @@ class FormActivity : AppCompatActivity() {
     private var namaKota = ""
     private var intensitasCahaya = ""
     private var namaTanah = ""
+    private var idTanah = ""
 
     private var addMethodCahayaID = ""
 
@@ -47,7 +48,17 @@ class FormActivity : AppCompatActivity() {
 
                 namaTanah = singleAdapter.SingleViewHolder(view).mNamaTanah.text.toString()
 
-                Toast.makeText(this@FormActivity, singleAdapter.SingleViewHolder(view).mNamaTanah.text, Toast.LENGTH_SHORT).show()
+                when(namaTanah) {
+                    "Tanah berpasir" -> {
+                        idTanah = "1"
+                    }"Tanah lempung" -> {
+                        idTanah = "2"
+                    }"Tanah liat" -> {
+                        idTanah = "3"
+                    }
+                }
+
+                Toast.makeText(this@FormActivity, idTanah, Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -78,9 +89,9 @@ class FormActivity : AppCompatActivity() {
 
         when(addMethodCahayaID){
             "rb_langsung" -> {
-                intensitasCahaya = binding.rbLangsung.text.toString()
+                intensitasCahaya = "1"
             }"rb_tidak_langsung" -> {
-                intensitasCahaya = binding.rbTidakLangsung.text.toString()
+                intensitasCahaya = "2"
             }
         }
     }
