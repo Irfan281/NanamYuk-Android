@@ -1,4 +1,4 @@
-package com.irfan.nanamyuk
+package com.irfan.nanamyuk.ui.form
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,12 +8,11 @@ import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.irfan.nanamyuk.adapter.PilihAdapter
+import com.irfan.nanamyuk.R
 import com.irfan.nanamyuk.adapter.TanahAdapter
 import com.irfan.nanamyuk.data.Tanah
-import com.irfan.nanamyuk.databinding.ActivityFormBinding
-import com.irfan.nanamyuk.databinding.ActivityHomeBinding
 import com.irfan.nanamyuk.ui.pilih.PilihActivity
+import com.irfan.nanamyuk.databinding.ActivityFormBinding
 
 class FormActivity : AppCompatActivity() {
 
@@ -57,8 +56,6 @@ class FormActivity : AppCompatActivity() {
                         idTanah = "3"
                     }
                 }
-
-                Toast.makeText(this@FormActivity, idTanah, Toast.LENGTH_SHORT).show()
             }
 
         })
@@ -69,6 +66,10 @@ class FormActivity : AppCompatActivity() {
             pilihIntensitas()
             if(namaTanah.isNotEmpty() and namaKota.isNotEmpty() and intensitasCahaya.isNotEmpty()) {
                 val intent = Intent(this, PilihActivity::class.java)
+                intent.putExtra("method", "rekomendasi")
+                intent.putExtra("kota", namaKota)
+                intent.putExtra("intensitas", intensitasCahaya)
+                intent.putExtra("idTanah", idTanah)
                 startActivity(intent)
             } else if(namaKota.isEmpty()){
                 Toast.makeText(this@FormActivity, "Silakan pilih kota terlebih dahulu", Toast.LENGTH_SHORT).show()

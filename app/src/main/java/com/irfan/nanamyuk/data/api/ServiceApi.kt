@@ -48,4 +48,12 @@ interface ServiceApi {
         @Path("id") id: String,
         @Body params: HashMap<String, Any>
     ): Call<UserPlantsResponseItem>
+
+    @GET("predict")
+    fun getRecommendation(
+        @Header("Authorization") header: String,
+        @Query("soil") soil: String,
+        @Query("light") light: String,
+        @Query("city") city: String
+    ) : Call<RecomResponse>
 }
