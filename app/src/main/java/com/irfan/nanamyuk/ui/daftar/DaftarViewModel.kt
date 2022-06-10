@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 
 class DaftarViewModel(private val pref: SessionPreferences) : ViewModel() {
     private val _login = MutableLiveData<AuthResponse>()
@@ -29,7 +30,7 @@ class DaftarViewModel(private val pref: SessionPreferences) : ViewModel() {
         _isLoading.value = true
         _state.value = false
 
-        val client = ConfigApi.getApiService().postRegister(map)
+        val client = ConfigApi.getApiService(BASE_URL).postRegister(map)
         client.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 _isLoading.value = false

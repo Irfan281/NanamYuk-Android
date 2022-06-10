@@ -3,6 +3,7 @@ package com.irfan.nanamyuk.ui.login
 import androidx.lifecycle.*
 import com.irfan.nanamyuk.data.api.AuthResponse
 import com.irfan.nanamyuk.data.api.ConfigApi
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import kotlinx.coroutines.launch
@@ -28,7 +29,7 @@ class LoginViewModel(private val pref: SessionPreferences) : ViewModel() {
         _isLoading.value = true
         _state.value = false
 
-        val client = ConfigApi.getApiService().postLogin(map)
+        val client = ConfigApi.getApiService(BASE_URL).postLogin(map)
         client.enqueue(object : Callback<AuthResponse> {
             override fun onResponse(call: Call<AuthResponse>, response: Response<AuthResponse>) {
                 _isLoading.value = false
