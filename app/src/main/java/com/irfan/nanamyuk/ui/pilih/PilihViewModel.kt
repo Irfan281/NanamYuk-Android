@@ -6,8 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import com.irfan.nanamyuk.data.api.ConfigApi
+import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_ML
 import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.api.PlantResponseItem
+import com.irfan.nanamyuk.data.api.RecomResponse
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
@@ -18,6 +20,9 @@ import retrofit2.Response
 class PilihViewModel(private val pref: SessionPreferences): ViewModel() {
     private val _plants = MutableLiveData<List<PlantResponseItem>>()
     val plants: LiveData<List<PlantResponseItem>> = _plants
+
+    private val _recoms = MutableLiveData<RecomResponse>()
+    val recoms: LiveData<RecomResponse> = _recoms
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -68,6 +73,27 @@ class PilihViewModel(private val pref: SessionPreferences): ViewModel() {
                 Log.e(TAG, "onFailure Throw: ${t.message}")
             }
 
+        })
+    }
+
+    fun getRecom(token: String, idTanah: String, intensitas: String, kota: String){
+        _isLoading.value = true
+
+        val client = ConfigApi.getApiService(BASE_ML).getRecommendation("Bearer $token", idTanah, intensitas, kota)
+        client.enqueue(object : Callback<RecomResponse> {
+            override fun onResponse(call: Call<RecomResponse>, response: Response<RecomResponse>) {
+                _isLoading.value = false
+
+                if (response.isSuccessful) {
+                    _recoms.value = response.body()
+                } else {
+                    Log.e(TAG, "onFailure: ${response.message()}")
+                }
+            }
+            override fun onFailure(call: Call<RecomResponse>, t: Throwable) {
+                _isLoading.value = false
+                Log.e(TAG, "onFailure Throw: ${t.message}")
+            }
         })
     }
 

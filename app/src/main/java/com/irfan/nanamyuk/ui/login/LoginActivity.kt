@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -63,6 +64,8 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this, HomeActivity::class.java)
                     startActivity(intent)
                     finish()
+
+                    Toast.makeText(this, "Anda berhasil login", Toast.LENGTH_SHORT).show()
                 }
             }
         }

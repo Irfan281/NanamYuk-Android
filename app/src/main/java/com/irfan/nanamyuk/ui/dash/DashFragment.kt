@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,7 +23,6 @@ import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
@@ -37,8 +35,8 @@ class DashFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private lateinit var dashViewModel: DashViewModel
-    private lateinit var adapterNotFinish: UserPlantsAdapter
-    private lateinit var adapterFinish: UserPlantsAdapter
+//    private lateinit var adapterNotFinish: UserPlantsAdapter
+//    private lateinit var adapterFinish: UserPlantsAdapter
 
     private var token = ""
 
@@ -90,20 +88,19 @@ class DashFragment : Fragment() {
                 }
             }
 
+            val adapterNotFinish = UserPlantsAdapter(notFinish)
+            val adapterFinish = UserPlantsAdapter(finish)
+
             if (UserPlants.isNotEmpty()){
                 binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
-                adapterNotFinish = UserPlantsAdapter(notFinish)
                 binding.rvNotFinish.adapter = adapterNotFinish
 
                 binding.rvFinish.layoutManager = LinearLayoutManager(activity)
-                adapterFinish = UserPlantsAdapter(finish)
                 binding.rvFinish.adapter = adapterFinish
             }
 
             adapterFinish.notifyDataSetChanged()
             adapterNotFinish.notifyDataSetChanged()
-
-
 
             adapterNotFinish.setOnItemClickLitener(object  : UserPlantsAdapter.OnItemClickListener {
                 override fun onItemClick(view: View, position: Int, id: String, date: String) {

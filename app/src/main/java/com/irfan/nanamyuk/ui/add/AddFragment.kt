@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.irfan.nanamyuk.FormActivity
+import com.irfan.nanamyuk.ui.form.FormActivity
 import com.irfan.nanamyuk.databinding.FragmentAddBinding
 import com.irfan.nanamyuk.ui.pilih.PilihActivity
 
@@ -40,14 +40,9 @@ class AddFragment : Fragment() {
 
             when(addMethod){
                 "rbRecom" -> {
-                    Toast.makeText(activity, "Ini rekomendasi", Toast.LENGTH_SHORT).show()
-                    
                     val intent = Intent(activity, FormActivity::class.java)
-                    intent.putExtra("method", "rekomendasi")
                     startActivity(intent)
                 }"rbChoice" -> {
-                    Toast.makeText(activity, "Ini pilih tanaman", Toast.LENGTH_SHORT).show()
-                    
                     val intent = Intent(activity, PilihActivity::class.java)
                     intent.putExtra("method", "pilih")
                     startActivity(intent)
