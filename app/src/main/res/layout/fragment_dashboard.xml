@@ -96,7 +96,7 @@
         <TextView
             android:id="@+id/tv_no_plant"
             style="@style/text.header"
-            android:text="Tambah Tanamam Dahulu"
+            android:text="Tambah Tanaman Dahulu"
             android:textColor="@color/accent_main"
             android:layout_marginTop="-90dp"
             android:visibility="gone"

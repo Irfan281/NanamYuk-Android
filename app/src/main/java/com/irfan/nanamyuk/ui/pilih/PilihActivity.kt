@@ -37,6 +37,7 @@ class PilihActivity : AppCompatActivity() {
     private lateinit var adapter: PilihAdapter
     private var tanamanId = ""
     private var token = ""
+    private var namaPenanda = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -163,10 +164,10 @@ class PilihActivity : AppCompatActivity() {
         }
 
         binding.nextButton.setOnClickListener {
-            binding.nextButton.visibility  = View.INVISIBLE
+
             pilihViewModel.getUserToken().observe(this) {
 
-                val namaPenanda = binding.tvPenanda.text.toString()
+                namaPenanda = binding.tvPenanda.text.toString()
                 val user = listOf(it.id)
                 val plant = listOf(tanamanId)
                 val state = false
@@ -187,7 +188,8 @@ class PilihActivity : AppCompatActivity() {
                     }
                     val countUserPlants = count.size + 1
 
-                    if (namaPenanda.isNotEmpty() && countUserPlants < 6){
+                    if (namaPenanda.isNotEmpty() && countUserPlants < 6 && tanamanId.isNotEmpty() && namaPenanda.isNotEmpty()){
+                        binding.nextButton.visibility  = View.INVISIBLE
                         pilihViewModel.postUserPlants(token, map)
                         pilihViewModel.state.observe(this){ state ->
                             Log.e("nilai state", state.toString())
@@ -198,12 +200,14 @@ class PilihActivity : AppCompatActivity() {
                             }
                         }
 
+                    } else if (namaPenanda.isEmpty()) {
+                        Toast.makeText(this, "Isi Nama Penanda Terlebih Dahulu", Toast.LENGTH_SHORT).show()
+                    } else if (tanamanId.isEmpty()) {
+                        Toast.makeText(this, "Pilih Tanaman Terlebih Dahulu", Toast.LENGTH_SHORT).show()
                     } else if (countUserPlants > 5){
                         val intent = Intent(this, SubscriptionActivity::class.java)
                         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
-                    } else {
-                        Toast.makeText(this, "Isi Terlebih Dahulu Nama Penanda", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

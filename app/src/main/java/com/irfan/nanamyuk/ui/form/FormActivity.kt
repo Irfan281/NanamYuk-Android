@@ -74,7 +74,7 @@ class FormActivity : AppCompatActivity() {
             } else if(namaKota.isEmpty()){
                 Toast.makeText(this@FormActivity, "Silakan isi kota terlebih dahulu", Toast.LENGTH_SHORT).show()
             } else if(intensitasCahaya.isEmpty()){
-                Toast.makeText(this@FormActivity, "Silakan intensitas cahaya terlebih dahulu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@FormActivity, "Silakan pilih intensitas cahaya terlebih dahulu", Toast.LENGTH_SHORT).show()
             } else if(namaTanah.isEmpty()){
                 Toast.makeText(this@FormActivity, "Silakan pilih tanah terlebih dahulu", Toast.LENGTH_SHORT).show()
             }
