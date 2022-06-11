@@ -47,10 +47,11 @@ class SettingFragment : Fragment() {
             }
 
             settingViewModel.state.observe(viewLifecycleOwner) {
-                if (it == true){
+                if (it){
                     val intent = Intent(activity, LoginActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
+
                     Toast.makeText(activity, "Anda berhasil logout!", Toast.LENGTH_SHORT).show()
                 }
             }

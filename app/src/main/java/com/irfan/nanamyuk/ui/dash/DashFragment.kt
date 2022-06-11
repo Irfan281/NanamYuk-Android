@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -23,19 +22,14 @@ import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
-import com.parassidhu.simpledate.toDateStandardConcise
-import com.parassidhu.simpledate.toTimeStandardWithoutSeconds
-import com.parassidhu.simpledate.toZuluFormat
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
-import me.moallemi.tools.extension.date.now
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.math.log
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -121,13 +115,13 @@ class DashFragment : Fragment() {
             val adapterNotFinish = UserPlantsAdapter(notFinish)
             val adapterFinish = UserPlantsAdapter(finish)
 
-
             if (UserPlants.isNotEmpty()){
                 binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
                 binding.rvNotFinish.adapter = adapterNotFinish
 
                 binding.rvFinish.layoutManager = LinearLayoutManager(activity)
                 binding.rvFinish.adapter = adapterFinish
+            }
 
                 adapterFinish.notifyDataSetChanged()
                 adapterNotFinish.notifyDataSetChanged()

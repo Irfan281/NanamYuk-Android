@@ -27,7 +27,7 @@
             android:name=".ui.pilih.PilihActivity"
             android:exported="false" />
         <activity
-            android:name=".FormActivity"
+            android:name=".ui.form.FormActivity"
             android:exported="false" />
         <activity
             android:name=".ui.detail.DetailActivity"

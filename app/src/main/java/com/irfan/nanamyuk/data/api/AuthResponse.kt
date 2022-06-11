@@ -10,7 +10,10 @@ data class AuthResponse(
 	val userId: String,
 
 	@field:SerializedName("token")
-	val token: String
+	val token: String,
+
+	@field:SerializedName("message")
+	val message: String
 )
 
 data class User(

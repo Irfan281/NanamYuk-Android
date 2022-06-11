@@ -20,9 +20,6 @@ class DaftarViewModel(private val pref: SessionPreferences) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _responseStatus = MutableLiveData<String>()
-    val responseStatus: LiveData<String> = _responseStatus
-
     private val _state = MutableLiveData<Boolean>()
     val state: LiveData<Boolean> = _state
 
