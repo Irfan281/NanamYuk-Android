@@ -1,13 +1,12 @@
 package com.irfan.nanamyuk.ui.pilih
 
+
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.MotionEvent
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -17,28 +16,25 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.adapter.PilihAdapter
+import com.irfan.nanamyuk.data.api.PlantResponseItem
+import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityPilihBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
-import com.parassidhu.simpledate.toDateYMDInDigits
-import com.parassidhu.simpledate.toTimeStandardWithoutSeconds
+import com.irfan.nanamyuk.ui.dash.DashViewModel
+import com.irfan.nanamyuk.ui.subscription.SubscriptionActivity
 import com.parassidhu.simpledate.toZuluFormat
-
-import me.moallemi.tools.extension.date.adjust
 import me.moallemi.tools.extension.date.now
-import me.moallemi.tools.extension.date.today
-
-
-import java.util.*
+import javax.xml.transform.OutputKeys.METHOD
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
 class PilihActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPilihBinding
     private lateinit var pilihViewModel: PilihViewModel
+    private lateinit var dashViewModel: DashViewModel
 
     private lateinit var adapter: PilihAdapter
-
     private var tanamanId = ""
     private var token = ""
 
@@ -67,7 +63,8 @@ class PilihActivity : AppCompatActivity() {
         pilihViewModel.plants.observe(this) { plants ->
             when(method) {
                 "rekomendasi" -> {
-                    binding.tvTambah.text = "Rekomendasi Tanaman"
+                    binding.tvTambah.text = "Hasil Rekomendasi"
+                    binding.tvRekom.visibility = View.VISIBLE
                     val tanah = intent.extras?.get("idTanah").toString()
                     val intensitas = intent.extras?.get("intensitas").toString()
                     val kota = intent.extras?.get("kota").toString()
@@ -80,25 +77,51 @@ class PilihActivity : AppCompatActivity() {
                         } else if(recomPlants.response == 200) {
                             val recoms = mutableListOf<PlantResponseItem>()
 
-                            for(plant in plants) {
-                                when (plant.namaTanaman) {
-                                    recomPlants.plant1 -> {
-                                        recoms.add(plant)
-                                    }
-                                    recomPlants.plant2 -> {
-                                        recoms.add(plant)
-                                    }
-                                    recomPlants.plant3 -> {
-                                        recoms.add(plant)
-                                    }
-                                    recomPlants.plant4 -> {
-                                        recoms.add(plant)
-                                    }
-                                    recomPlants.plant5 -> {
-                                        recoms.add(plant)
-                                    }
+                            for (x in plants) {
+                                if (x.namaTanaman == recomPlants.plant1){
+                                    recoms.add(x)
                                 }
                             }
+                            for (x in plants) {
+                                if (x.namaTanaman == recomPlants.plant2){
+                                    recoms.add(x)
+                                }
+                            }
+                            for (x in plants) {
+                                if (x.namaTanaman == recomPlants.plant3){
+                                    recoms.add(x)
+                                }
+                            }
+                            for (x in plants) {
+                                if (x.namaTanaman == recomPlants.plant4){
+                                    recoms.add(x)
+                                }
+                            }
+                            for (x in plants) {
+                                if (x.namaTanaman == recomPlants.plant5){
+                                    recoms.add(x)
+                                }
+                            }
+
+//                            for(plant in plants) {
+//                                when (plant.namaTanaman) {
+//                                    recomPlants.plant1 -> {
+//                                        recoms.add(plant)
+//                                    }
+//                                    recomPlants.plant2 -> {
+//                                        recoms.add(plant)
+//                                    }
+//                                    recomPlants.plant3 -> {
+//                                        recoms.add(plant)
+//                                    }
+//                                    recomPlants.plant4 -> {
+//                                        recoms.add(plant)
+//                                    }
+//                                    recomPlants.plant5 -> {
+//                                        recoms.add(plant)
+//                                    }
+//                                }
+//                            }
 
                             Log.e("fafu", recoms.toString())
 
@@ -136,9 +159,11 @@ class PilihActivity : AppCompatActivity() {
 
         pilihViewModel.isLoading.observe(this) { isLoading ->
             binding.progress.visibility = if (isLoading) View.VISIBLE else View.GONE
+            binding.progressText.visibility = if (isLoading) View.VISIBLE else View.GONE
         }
 
         binding.nextButton.setOnClickListener {
+            binding.nextButton.visibility  = View.INVISIBLE
             pilihViewModel.getUserToken().observe(this) {
 
                 val namaPenanda = binding.tvPenanda.text.toString()
@@ -154,21 +179,33 @@ class PilihActivity : AppCompatActivity() {
                     "State" to state
                 )
 
-                if (namaPenanda.isNotEmpty()){
-                    pilihViewModel.postUserPlants(it.token, map)
-                    pilihViewModel.state.observe(this){ state ->
-                        Log.e("nilai state", state.toString())
-                        if (state) {
-                            val intent = Intent(this, HomeActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intent)
-                        }
+                dashViewModel.getUserPlants(token)
+                dashViewModel.userplants.observe(this) {
+                    val count = mutableListOf<UserPlantsResponseItem>()
+                    for (i in it) {
+                        count.add(i)
                     }
+                    val countUserPlants = count.size + 1
 
-                } else {
-                    Toast.makeText(this, "Isi Terlebih Dahulu Nama Penanda", Toast.LENGTH_SHORT).show()
+                    if (namaPenanda.isNotEmpty() && countUserPlants < 6){
+                        pilihViewModel.postUserPlants(token, map)
+                        pilihViewModel.state.observe(this){ state ->
+                            Log.e("nilai state", state.toString())
+                            if (state) {
+                                val intent = Intent(this, HomeActivity::class.java)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                            }
+                        }
+
+                    } else if (countUserPlants > 5){
+                        val intent = Intent(this, SubscriptionActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    } else {
+                        Toast.makeText(this, "Isi Terlebih Dahulu Nama Penanda", Toast.LENGTH_SHORT).show()
+                    }
                 }
-
             }
         }
 
@@ -181,6 +218,7 @@ class PilihActivity : AppCompatActivity() {
 
     private fun setupViewModel(){
         pilihViewModel = ViewModelProvider(this, ViewModelFactory(SessionPreferences.getInstance(dataStore)))[PilihViewModel::class.java]
+        dashViewModel = ViewModelProvider(this, ViewModelFactory(SessionPreferences.getInstance(dataStore)))[DashViewModel::class.java]
     }
 
     companion object {

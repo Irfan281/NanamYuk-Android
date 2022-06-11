@@ -22,9 +22,10 @@ import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
+import com.parassidhu.simpledate.toDateStandardConcise
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
-import kotlinx.datetime.toLocalDateTime
+import me.moallemi.tools.extension.date.now
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
@@ -105,7 +106,7 @@ class DashFragment : Fragment() {
             }
 
             for (i in UserPlants) {
-                if (i.state){
+                if (i.state) {
                     finish.add(i)
                 } else {
                     notFinish.add(i)
@@ -115,7 +116,22 @@ class DashFragment : Fragment() {
             val adapterNotFinish = UserPlantsAdapter(notFinish)
             val adapterFinish = UserPlantsAdapter(finish)
 
-            if (UserPlants.isNotEmpty()){
+            if (notFinish.isNotEmpty()) {
+                binding.animationView2.visibility = View.GONE
+            }
+            if (finish.isNotEmpty()) {
+                binding.animationView1.visibility = View.GONE
+            }
+            if (finish.isEmpty() && notFinish.isEmpty()){
+                binding.animationView3.visibility = View.VISIBLE
+                binding.tvNoPlant.visibility = View.VISIBLE
+                binding.tvStatusNo.visibility = View.GONE
+                binding.tvStatusYes.visibility = View.GONE
+                binding.animationView2.visibility = View.GONE
+                binding.animationView1.visibility = View.GONE
+            }
+
+            if (UserPlants.isNotEmpty()) {
                 binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
                 binding.rvNotFinish.adapter = adapterNotFinish
 
@@ -123,12 +139,17 @@ class DashFragment : Fragment() {
                 binding.rvFinish.adapter = adapterFinish
             }
 
-                adapterFinish.notifyDataSetChanged()
-                adapterNotFinish.notifyDataSetChanged()
-            }
+            adapterFinish.notifyDataSetChanged()
+            adapterNotFinish.notifyDataSetChanged()
 
-            adapterNotFinish.setOnItemClickLitener(object  : UserPlantsAdapter.OnItemClickListener {
-                override fun onItemClick(view: View, position: Int, id: String, date: String, duration: String) {
+            adapterNotFinish.setOnItemClickLitener(object : UserPlantsAdapter.OnItemClickListener {
+                override fun onItemClick(
+                    view: View,
+                    position: Int,
+                    id: String,
+                    date: String,
+                    duration: String
+                ) {
                     val map = hashMapOf<String, Any>(
                         "State" to true,
                         "Date" to setTanggal(date, duration)
@@ -143,7 +164,6 @@ class DashFragment : Fragment() {
 
             })
         }
-
         dashViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
             binding.progress.visibility = if (isLoading) View.VISIBLE else View.GONE
         }

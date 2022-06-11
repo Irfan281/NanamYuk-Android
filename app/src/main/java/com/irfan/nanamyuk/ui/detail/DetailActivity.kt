@@ -2,25 +2,21 @@ package com.irfan.nanamyuk.ui.detail
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.irfan.nanamyuk.HomeActivity
-import com.irfan.nanamyuk.R
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter.Companion.ID
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter.Companion.NAME
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter.Companion.UID
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityDetailBinding
-
 import com.irfan.nanamyuk.ui.ViewModelFactory
-import com.irfan.nanamyuk.ui.pilih.PilihViewModel
 
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")

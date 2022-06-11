@@ -1,6 +1,5 @@
 package com.irfan.nanamyuk.adapter
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,9 @@ import com.bumptech.glide.Glide
 import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.databinding.ItemStatusBinding
 import com.irfan.nanamyuk.ui.detail.DetailActivity
-import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAccessor
-import java.util.*
 
 class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
     RecyclerView.Adapter<UserPlantsAdapter.ViewHolder>() {
@@ -28,7 +24,7 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
 
     private var onClick: OnItemClickListener? = null
 
-    fun setOnItemClickLitener(mOnItemClickListener: UserPlantsAdapter.OnItemClickListener) {
+    fun setOnItemClickLitener(mOnItemClickListener: OnItemClickListener) {
         this.onClick = mOnItemClickListener
     }
 
@@ -49,8 +45,6 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
         Glide.with(holder.itemView).load(plant[0].image).into(holder.binding.circleImageView)
         holder.binding.tvPenanda.text = namaPenanda
         holder.binding.tvTanaman.text = plant[0].namaTanaman
-
-
 
         holder.binding.tvDate.text = formatDate(date)
 

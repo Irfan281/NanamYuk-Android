@@ -2,24 +2,21 @@ package com.irfan.nanamyuk.ui.daftar
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.irfan.nanamyuk.HomeActivity
-import com.irfan.nanamyuk.R
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityDaftarBinding
-import com.irfan.nanamyuk.databinding.ActivityLoginBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
 import com.irfan.nanamyuk.ui.login.LoginActivity
-import com.irfan.nanamyuk.ui.login.LoginViewModel
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 

@@ -7,7 +7,6 @@ import com.irfan.nanamyuk.data.api.ConfigApi
 import com.irfan.nanamyuk.data.api.ConfigApi.Companion.BASE_URL
 import com.irfan.nanamyuk.data.datastore.SessionModel
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
-import com.irfan.nanamyuk.ui.pilih.PilihViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

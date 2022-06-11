@@ -2,12 +2,6 @@ package com.irfan.nanamyuk.data.api
 
 import com.google.gson.annotations.SerializedName
 
-data class UserPlantsResponse(
-
-	@field:SerializedName("UserPlantsResponse")
-	val userPlantsResponse: List<UserPlantsResponseItem>
-)
-
 data class UserPlantsResponseItem(
 
 	@field:SerializedName("Nama Penanda")

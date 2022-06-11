@@ -72,7 +72,7 @@ class FormActivity : AppCompatActivity() {
                 intent.putExtra("idTanah", idTanah)
                 startActivity(intent)
             } else if(namaKota.isEmpty()){
-                Toast.makeText(this@FormActivity, "Silakan pilih kota terlebih dahulu", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@FormActivity, "Silakan isi kota terlebih dahulu", Toast.LENGTH_SHORT).show()
             } else if(intensitasCahaya.isEmpty()){
                 Toast.makeText(this@FormActivity, "Silakan intensitas cahaya terlebih dahulu", Toast.LENGTH_SHORT).show()
             } else if(namaTanah.isEmpty()){

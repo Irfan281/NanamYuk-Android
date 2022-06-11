@@ -16,6 +16,7 @@ import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.R
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.ui.ViewModelFactory
+import com.irfan.nanamyuk.ui.login.LoginActivity
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -36,7 +37,7 @@ class SplashActivity : AppCompatActivity() {
             splashViewModel.getUserToken().observe(this) {
                 Log.d("session", "token ${it.token}")
                 if (it.token.isEmpty()) {
-                    val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+                    val intent = Intent(this@SplashActivity, LoginActivity::class.java)
                     startActivity(intent)
                     finish()
                 } else {

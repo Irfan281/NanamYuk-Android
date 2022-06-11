@@ -83,16 +83,17 @@ class PilihViewModel(private val pref: SessionPreferences): ViewModel() {
         val client = ConfigApi.getApiService(BASE_ML).getRecommendation("Bearer $token", idTanah, intensitas, kota)
         client.enqueue(object : Callback<RecomResponse> {
             override fun onResponse(call: Call<RecomResponse>, response: Response<RecomResponse>) {
-                _isLoading.value = false
+
 
                 if (response.isSuccessful) {
+                    _isLoading.value = false
                     _recoms.value = response.body()
                 } else {
                     Log.e(TAG, "onFailure: ${response.message()}")
                 }
             }
             override fun onFailure(call: Call<RecomResponse>, t: Throwable) {
-                _isLoading.value = false
+                //_isLoading.value = false
                 Log.e(TAG, "onFailure Throw: ${t.message}")
             }
         })

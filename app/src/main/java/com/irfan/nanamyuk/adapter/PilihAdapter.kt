@@ -1,11 +1,9 @@
 package com.irfan.nanamyuk.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -46,11 +44,7 @@ class PilihAdapter (private var datas: List<PlantResponseItem>) :
         Glide.with(holder.itemView).load(url).into(holder.image)
         holder.mTvId.text = id
 
-        if (selected == position) {
-            holder.itemView.isSelected = true
-        } else {
-            holder.itemView.isSelected = false
-        }
+        holder.itemView.isSelected = selected == position
 
         if (onClick != null) {
             holder.itemView.setOnClickListener {

@@ -1,15 +1,10 @@
 package com.irfan.nanamyuk.ui.rekomendasi
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.irfan.nanamyuk.R
-import com.irfan.nanamyuk.adapter.PilihAdapter
-import com.irfan.nanamyuk.databinding.ActivityPilihBinding
+import androidx.appcompat.app.AppCompatActivity
 import com.irfan.nanamyuk.databinding.ActivityRekomendasiBinding
 
 class RekomendasiActivity : AppCompatActivity() {

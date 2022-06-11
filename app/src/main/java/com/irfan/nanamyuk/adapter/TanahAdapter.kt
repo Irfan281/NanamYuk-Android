@@ -48,11 +48,7 @@ class TanahAdapter (context: Context, private var datas: List<Tanah>) :
             .load(urlPhoto)
             .into(holder.mPhoto)
 
-        if (selected == position) {
-            holder.itemView.isSelected = true
-        } else {
-            holder.itemView.isSelected = false
-        }
+        holder.itemView.isSelected = selected == position
 
         if (onClick != null) {
             holder.itemView.setOnClickListener {

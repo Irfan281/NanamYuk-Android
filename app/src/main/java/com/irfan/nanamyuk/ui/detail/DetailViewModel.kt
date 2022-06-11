@@ -20,7 +20,6 @@ class DetailViewModel(private val pref: SessionPreferences) : ViewModel() {
     val plants: LiveData<PlantResponseItem> = _plants
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
 
     private val _state = MutableLiveData<Boolean>()
     val state : LiveData<Boolean> = _state
