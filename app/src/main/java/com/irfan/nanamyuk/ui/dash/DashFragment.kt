@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
@@ -22,14 +23,19 @@ import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
+import com.parassidhu.simpledate.toDateStandardConcise
+import com.parassidhu.simpledate.toTimeStandardWithoutSeconds
+import com.parassidhu.simpledate.toZuluFormat
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
 import kotlinx.datetime.toLocalDateTime
+import me.moallemi.tools.extension.date.now
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.math.log
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -37,9 +43,6 @@ class DashFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
     private lateinit var dashViewModel: DashViewModel
-    private lateinit var adapterNotFinish: UserPlantsAdapter
-    private lateinit var adapterFinish: UserPlantsAdapter
-
     private var token = ""
 
     private val binding get() = _binding!!
@@ -70,6 +73,16 @@ class DashFragment : Fragment() {
 
     }
 
+    @SuppressLint("SetTextI18n")
+    override fun onResume() {
+        super.onResume()
+        dashViewModel.getUserToken().observe(viewLifecycleOwner) {
+            binding.tvHalo.text = "Halo, " + it.name
+            dashViewModel.getUserPlants(it.token)
+            token = it.token
+        }
+    }
+
     @SuppressLint("SetTextI18n", "SimpleDateFormat", "NotifyDataSetChanged")
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setupAction() {
@@ -82,6 +95,21 @@ class DashFragment : Fragment() {
             val notFinish = mutableListOf<UserPlantsResponseItem>()
             val finish = mutableListOf<UserPlantsResponseItem>()
 
+            for (x in UserPlants) {
+                val dateNow = now().toDateStandardConcise()
+                Log.e("date now", dateNow)
+
+                val dateUserPlant = formatDate(x.date, "dd MMM yyyy")
+                Log.e("plant date", dateUserPlant)
+                if (dateNow == dateUserPlant && x.state) {
+                    val map = hashMapOf<String, Any>(
+                        "State" to false
+                    )
+
+                    dashViewModel.updateUserPlants(token, map, x.id)
+                }
+            }
+
             for (i in UserPlants) {
                 if (i.state){
                     finish.add(i)
@@ -90,26 +118,26 @@ class DashFragment : Fragment() {
                 }
             }
 
+            val adapterNotFinish = UserPlantsAdapter(notFinish)
+            val adapterFinish = UserPlantsAdapter(finish)
+
+
             if (UserPlants.isNotEmpty()){
                 binding.rvNotFinish.layoutManager = LinearLayoutManager(activity)
-                adapterNotFinish = UserPlantsAdapter(notFinish)
                 binding.rvNotFinish.adapter = adapterNotFinish
 
                 binding.rvFinish.layoutManager = LinearLayoutManager(activity)
-                adapterFinish = UserPlantsAdapter(finish)
                 binding.rvFinish.adapter = adapterFinish
+
+                adapterFinish.notifyDataSetChanged()
+                adapterNotFinish.notifyDataSetChanged()
             }
 
-            adapterFinish.notifyDataSetChanged()
-            adapterNotFinish.notifyDataSetChanged()
-
-
-
             adapterNotFinish.setOnItemClickLitener(object  : UserPlantsAdapter.OnItemClickListener {
-                override fun onItemClick(view: View, position: Int, id: String, date: String) {
+                override fun onItemClick(view: View, position: Int, id: String, date: String, duration: String) {
                     val map = hashMapOf<String, Any>(
                         "State" to true,
-                        "Date" to setTanggal(date)
+                        "Date" to setTanggal(date, duration)
                     )
 
                     dashViewModel.updateUserPlants(token, map, id)
@@ -127,28 +155,26 @@ class DashFragment : Fragment() {
         }
     }
 
-    private fun setTanggal(date: String): String {
-        val hour = formatDate(date, "H").toInt()
-        var h = 0
-
+    private fun setTanggal(date: String, duration: String): String {
         val timeZone = TimeZone.of("UTC")
-        var next: LocalDateTime = Clock.System.now().toLocalDateTime(timeZone)
-
         val d = LocalDateTime.parse(date.replace("Z", ""))
         val instant = d.toInstant(timeZone)
 
-        return if (hour == 8) {
-            instant.toString().replace("08", "17") + ":00.000Z"
-        } else {
+        var add = 1
 
-            val instantOneDayLater = instant.plus(1, DateTimeUnit.DAY, timeZone)
-            next = instantOneDayLater.toLocalDateTime(timeZone)
-
-            next.toString().replace("17", "08") + ":00.000Z"
+        if (duration == "1x7") {
+            add = 7
+        } else if (duration == "1x14") {
+            add = 14
         }
+
+        val instantOneDayLater = instant.plus(add, DateTimeUnit.DAY, timeZone)
+        val next = instantOneDayLater.toLocalDateTime(timeZone)
+
+        return next.toString() + "Z"
     }
 
-    fun formatDate(currentDateString: String, pattern: String): String {
+    private fun formatDate(currentDateString: String, pattern: String): String {
         val instant = Instant.parse(currentDateString)
         val formatter = DateTimeFormatter.ofPattern(pattern)
             .withZone(ZoneId.of("UTC"))

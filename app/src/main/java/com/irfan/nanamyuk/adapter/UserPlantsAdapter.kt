@@ -23,6 +23,7 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
     companion object {
         const val ID = "id"
         const val NAME = "name"
+        const val UID = "uid"
     }
 
     private var onClick: OnItemClickListener? = null
@@ -58,6 +59,7 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
             val i = Intent(holder.itemView.context, DetailActivity::class.java)
             i.putExtra(ID, plant[0].id)
             i.putExtra(NAME, namaPenanda)
+            i.putExtra(UID, id)
             holder.itemView.context.startActivity(i)
         }
 
@@ -67,22 +69,23 @@ class UserPlantsAdapter(private val datas: List<UserPlantsResponseItem>) :
                     holder.binding.fabWater,
                     holder.adapterPosition,
                     id,
-                    date
+                    date,
+                    plant[0].durasiSiram
                 )
             }
         }
     }
 
-    fun formatDate(currentDateString: String): String {
+    private fun formatDate(currentDateString: String): String {
         val instant = Instant.parse(currentDateString)
-        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy | HH:mm")
+        val formatter = DateTimeFormatter.ofPattern("dd MMM yyyy")
             .withZone(ZoneId.of("UTC"))
         return formatter.format(instant)
     }
 
 
     interface OnItemClickListener {
-        fun onItemClick(view: View, position: Int, id:String, date: String)
+        fun onItemClick(view: View, position: Int, id:String, date: String, duration: String)
     }
 
     override fun getItemCount(): Int = datas.size

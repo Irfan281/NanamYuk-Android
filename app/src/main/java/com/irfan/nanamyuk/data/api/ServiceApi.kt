@@ -48,4 +48,10 @@ interface ServiceApi {
         @Path("id") id: String,
         @Body params: HashMap<String, Any>
     ): Call<UserPlantsResponseItem>
+
+    @DELETE("UserPlants/{id}")
+    fun deleteUserPlants(
+        @Header("Authorization") header: String,
+        @Path("id") id: String
+    ): Call<UserPlantsResponseItem>
 }

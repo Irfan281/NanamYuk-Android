@@ -9,6 +9,7 @@ import com.irfan.nanamyuk.ui.detail.DetailViewModel
 import com.irfan.nanamyuk.ui.login.LoginViewModel
 import com.irfan.nanamyuk.ui.pilih.PilihViewModel
 import com.irfan.nanamyuk.ui.setting.SettingViewModel
+import com.irfan.nanamyuk.ui.splash.SplashViewModel
 
 class ViewModelFactory(private val pref: SessionPreferences) :
     ViewModelProvider.NewInstanceFactory() {
@@ -33,6 +34,9 @@ class ViewModelFactory(private val pref: SessionPreferences) :
             }
             modelClass.isAssignableFrom(DetailViewModel::class.java) -> {
                 DetailViewModel(pref) as T
+            }
+            modelClass.isAssignableFrom(SplashViewModel::class.java) -> {
+                SplashViewModel(pref) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)

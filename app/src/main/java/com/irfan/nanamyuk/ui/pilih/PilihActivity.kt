@@ -4,9 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
+import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.datastore.core.DataStore
@@ -19,16 +18,9 @@ import com.irfan.nanamyuk.adapter.PilihAdapter
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityPilihBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
-import com.parassidhu.simpledate.toDateYMDInDigits
-import com.parassidhu.simpledate.toTimeStandardWithoutSeconds
 import com.parassidhu.simpledate.toZuluFormat
 
-import me.moallemi.tools.extension.date.adjust
 import me.moallemi.tools.extension.date.now
-import me.moallemi.tools.extension.date.today
-
-
-import java.util.*
 
 private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settings")
 
@@ -88,7 +80,7 @@ class PilihActivity : AppCompatActivity() {
         }
 
         binding.nextButton.setOnClickListener {
-            pilihViewModel.getUserToken().observe(this) {
+            pilihViewModel.getUserToken().observe(this) { it ->
 
                 val namaPenanda = binding.tvPenanda.text.toString()
                 val user = listOf(it.id)
@@ -105,9 +97,15 @@ class PilihActivity : AppCompatActivity() {
 
                 if (namaPenanda.isNotEmpty()){
                     pilihViewModel.postUserPlants(it.token, map)
-                    val intent = Intent(this, HomeActivity::class.java)
-                    finish()
-                    startActivity(intent)
+                    pilihViewModel.state.observe(this){ state ->
+                        Log.e("nilai state", state.toString())
+                        if (state) {
+                            val intent = Intent(this, HomeActivity::class.java)
+                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            startActivity(intent)
+                        }
+                    }
+
 
                 } else {
                     Toast.makeText(this, "Isi Terlebih Dahulu Nama Penanda", Toast.LENGTH_SHORT).show()
@@ -120,26 +118,7 @@ class PilihActivity : AppCompatActivity() {
     }
 
     private fun setTanggal(): String {
-        val currentHour = now().toTimeStandardWithoutSeconds().split(":")
-
-        val hour = if (currentHour[0].toInt() in 8..17){
-            17
-        } else {
-            8
-        }
-
-        val dateRaw = today().toDateYMDInDigits().split("-")
-        val date = Array(dateRaw.size) { dateRaw[it].toInt() }
-
-        return Date().adjust(
-            year = date[0],
-            month = date[1],
-            day = date[2],
-            hour = hour,
-            minute = 0,
-            0,
-            0
-        ).toZuluFormat()
+        return now().toZuluFormat()
     }
 
     private fun setupViewModel(){

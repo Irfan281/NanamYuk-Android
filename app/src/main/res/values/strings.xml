@@ -60,4 +60,5 @@
     <string name="penanda">Masukkan Nama Penanda</string>
     <string name="penanda_msg_2">Misal, Bayam Halaman Belakang</string>
     <string name="chekclist">chekclist</string>
+    <string name="time_splash">3000</string>
 </resources>

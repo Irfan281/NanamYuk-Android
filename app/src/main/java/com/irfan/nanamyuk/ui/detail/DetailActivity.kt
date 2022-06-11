@@ -1,17 +1,21 @@
 package com.irfan.nanamyuk.ui.detail
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.irfan.nanamyuk.HomeActivity
 import com.irfan.nanamyuk.R
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter.Companion.ID
 import com.irfan.nanamyuk.adapter.UserPlantsAdapter.Companion.NAME
+import com.irfan.nanamyuk.adapter.UserPlantsAdapter.Companion.UID
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.ActivityDetailBinding
 
@@ -24,6 +28,7 @@ private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(na
 class DetailActivity : AppCompatActivity() {
     private lateinit var binding : ActivityDetailBinding
     private lateinit var detailViewModel: DetailViewModel
+    private var token = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,20 +37,22 @@ class DetailActivity : AppCompatActivity() {
 
         val id = intent.extras?.get(ID).toString()
         val name = intent.extras?.get(NAME).toString()
+        val uid = intent.extras?.get(UID).toString()
 
         Log.e("tes intent", id)
 
         setupViewModel()
-        setupAction(id, name)
+        setupAction(id, name, uid)
     }
 
     private fun setupViewModel() {
         detailViewModel = ViewModelProvider(this, ViewModelFactory(SessionPreferences.getInstance(dataStore)))[DetailViewModel::class.java]
     }
 
-    private fun setupAction(id : String, name : String) {
+    private fun setupAction(id : String, name : String, uid: String) {
         detailViewModel.getUserToken().observe(this) {
             detailViewModel.getPlants(it.token, id)
+            token = it.token
         }
 
         detailViewModel.plants.observe(this){ plants ->
@@ -63,5 +70,14 @@ class DetailActivity : AppCompatActivity() {
                 textTutorial.text = plants.tutorial
             }
         }
-    }
+
+        binding.delete.setOnClickListener{
+            detailViewModel.deleteUserPlants(token, uid)
+
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+
+            }
+        }
 }

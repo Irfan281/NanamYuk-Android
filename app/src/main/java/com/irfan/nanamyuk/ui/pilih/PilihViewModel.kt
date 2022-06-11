@@ -65,6 +65,7 @@ class PilihViewModel(private val pref: SessionPreferences): ViewModel() {
             }
 
             override fun onFailure(call: Call<UserPlantsResponseItem>, t: Throwable) {
+                _state.value = true
                 Log.e(TAG, "onFailure Throw: ${t.message}")
             }
 
