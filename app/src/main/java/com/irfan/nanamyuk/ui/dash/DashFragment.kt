@@ -22,6 +22,7 @@ import com.irfan.nanamyuk.data.api.UserPlantsResponseItem
 import com.irfan.nanamyuk.data.datastore.SessionPreferences
 import com.irfan.nanamyuk.databinding.FragmentDashboardBinding
 import com.irfan.nanamyuk.ui.ViewModelFactory
+import com.irfan.nanamyuk.ui.subscription.SubscriptionActivity
 import com.parassidhu.simpledate.toDateStandardConcise
 import kotlinx.datetime.*
 import kotlinx.datetime.TimeZone
@@ -62,6 +63,11 @@ class DashFragment : Fragment() {
             binding.tvHalo.text = "Halo, " + it.name
             dashViewModel.getUserPlants(it.token)
             token = it.token
+        }
+
+        binding.btnPremium.setOnClickListener {
+            val i = Intent(activity, SubscriptionActivity::class.java)
+            startActivity(i)
         }
 
         setupAction()

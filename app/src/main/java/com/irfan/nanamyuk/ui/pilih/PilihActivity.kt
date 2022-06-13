@@ -104,26 +104,6 @@ class PilihActivity : AppCompatActivity() {
                                 }
                             }
 
-//                            for(plant in plants) {
-//                                when (plant.namaTanaman) {
-//                                    recomPlants.plant1 -> {
-//                                        recoms.add(plant)
-//                                    }
-//                                    recomPlants.plant2 -> {
-//                                        recoms.add(plant)
-//                                    }
-//                                    recomPlants.plant3 -> {
-//                                        recoms.add(plant)
-//                                    }
-//                                    recomPlants.plant4 -> {
-//                                        recoms.add(plant)
-//                                    }
-//                                    recomPlants.plant5 -> {
-//                                        recoms.add(plant)
-//                                    }
-//                                }
-//                            }
-
                             Log.e("fafu", recoms.toString())
 
                             adapter = PilihAdapter(recoms)
@@ -180,15 +160,8 @@ class PilihActivity : AppCompatActivity() {
                     "State" to state
                 )
 
-                dashViewModel.getUserPlants(token)
-                dashViewModel.userplants.observe(this) {
-                    val count = mutableListOf<UserPlantsResponseItem>()
-                    for (i in it) {
-                        count.add(i)
-                    }
-                    val countUserPlants = count.size + 1
 
-                    if (namaPenanda.isNotEmpty() && countUserPlants < 6 && tanamanId.isNotEmpty() && namaPenanda.isNotEmpty()){
+                    if (namaPenanda.isNotEmpty() && tanamanId.isNotEmpty() && namaPenanda.isNotEmpty()){
                         binding.nextButton.visibility  = View.INVISIBLE
                         pilihViewModel.postUserPlants(token, map)
                         pilihViewModel.state.observe(this){ state ->
@@ -199,17 +172,12 @@ class PilihActivity : AppCompatActivity() {
                                 startActivity(intent)
                             }
                         }
-
                     } else if (namaPenanda.isEmpty()) {
                         Toast.makeText(this, "Isi Nama Penanda Terlebih Dahulu", Toast.LENGTH_SHORT).show()
                     } else if (tanamanId.isEmpty()) {
                         Toast.makeText(this, "Pilih Tanaman Terlebih Dahulu", Toast.LENGTH_SHORT).show()
-                    } else if (countUserPlants > 5){
-                        val intent = Intent(this, SubscriptionActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
                     }
-                }
+
             }
         }
 
