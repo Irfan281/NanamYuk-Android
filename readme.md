@@ -15,9 +15,10 @@ NanamYuk! android application Part of Product Based Bangkit Capstone Project Tea
 Make UI design, starts from a paper prototype, and turn it into a mockup. Then we sliced those designs into android XML Layout form. Next, we integrate it with the API endpoint to use authentication, plant recommendations using the ML model, and access plant data to apply it for each feature.
 
 ## Features
-1. Authentication
+1. Authentication and Logout
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/66265368/179542903-623c0ca6-7ade-4e2a-8908-439377705278.gif" width="300">
+  <img src="https://user-images.githubusercontent.com/66265368/179542903-623c0ca6-7ade-4e2a-8908-439377705278.gif" width="200">
+  <img src="https://user-images.githubusercontent.com/66265368/179543500-ceef7d94-a29d-4d21-a1c5-ea0bac329ca9.gif" width="200">
 </p>
 
 ## Architecture
