@@ -15,11 +15,28 @@ NanamYuk! android application Part of Product Based Bangkit Capstone Project Tea
 Make UI design, starts from a paper prototype, and turn it into a mockup. Then we sliced those designs into android XML Layout form. Next, we integrate it with the API endpoint to use authentication, plant recommendations using the ML model, and access plant data to apply it for each feature.
 
 ## Features
-1. Authentication and Logout
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/66265368/179542903-623c0ca6-7ade-4e2a-8908-439377705278.gif" width="200">
-  <img src="https://user-images.githubusercontent.com/66265368/179543500-ceef7d94-a29d-4d21-a1c5-ea0bac329ca9.gif" width="200">
-</p>
+
+<div align="center">
+  
+  |  <img src="https://user-images.githubusercontent.com/66265368/179542903-623c0ca6-7ade-4e2a-8908-439377705278.gif" width="200"> | <img src="https://user-images.githubusercontent.com/66265368/179543500-ceef7d94-a29d-4d21-a1c5-ea0bac329ca9.gif" width="200"> |
+  |:--:|:--:| 
+  | *Authentication* | *Logout* |
+</div>
+
+
+<div align="center">
+  
+  |  <img src="https://user-images.githubusercontent.com/66265368/179545834-86a42f84-fe26-45f1-bde0-f781b4d3f62e.gif" width="200"> | <img src="https://user-images.githubusercontent.com/66265368/179545952-b92169db-d407-4971-977b-448b0d2e0ec4.gif" width="200"> |
+  |:--:|:--:| 
+  | *Add Plant* | *Plant Recommender* |
+</div>
+
+<div align="center">
+  
+  |  <img src="https://user-images.githubusercontent.com/66265368/179546317-445d6eb3-f202-46bf-a97e-fd2b9a5c0a5f.gif" width="200"> | <img src="https://user-images.githubusercontent.com/66265368/179546355-805356fa-ab85-4fd4-b138-2b3192385899.gif" width="200"> |
+  |:--:|:--:|
+  | *Watering Management* | *Plant Details & Delete Plant* |
+</div>
 
 ## Architecture
 <p align="center">
