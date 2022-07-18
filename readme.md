@@ -3,7 +3,15 @@
   <img src="https://user-images.githubusercontent.com/66265368/173265990-4be444e5-7333-46fb-bcd2-4afa33db5026.png" width="400">
 </p>
 
-NanamYuk! android application Part of Product Based Bangkit Capstone Project Team C22-PS316
+<div align="center">
+  
+  |  <img src="https://firebasestorage.googleapis.com/v0/b/bangkit-dashboard/o/2022%2Fassets%2Fbadges%2F53-capstone-team-semifinalists.svg?alt=media&token=046f2278-dbbd-43b5-8bd2-b81b085d38b2" width="300"> |
+  |:--:|
+  | [NanamYuk! managed be the Top 53 out of 433 teams](https://dashboard.bangkit.academy/badges/WARRSODG) | 
+</div>
+
+NanamYuk! android application Part of Product Based Bangkit Capstone Project Team C22-PS316.
+
 
 ## Android Development Team
 |  Name | Bangkit ID | Contacts |
