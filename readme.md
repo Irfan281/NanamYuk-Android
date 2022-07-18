@@ -1,5 +1,7 @@
 # NanamYuk-Android
-![Banner](https://user-images.githubusercontent.com/66265368/173265990-4be444e5-7333-46fb-bcd2-4afa33db5026.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/66265368/173265990-4be444e5-7333-46fb-bcd2-4afa33db5026.png" width="400">
+</p>
 
 NanamYuk! android application Part of Product Based Bangkit Capstone Project Team C22-PS316
 
@@ -13,7 +15,9 @@ NanamYuk! android application Part of Product Based Bangkit Capstone Project Tea
 Make UI design, starts from a paper prototype, and turn it into a mockup. Then we sliced those designs into android XML Layout form. Next, we integrate it with the API endpoint to use authentication, plant recommendations using the ML model, and access plant data to apply it for each feature.
 
 ## Architecture
-<img src="https://user-images.githubusercontent.com/66265368/173266358-82eaaf68-98cd-4515-8890-0e5e94b8f3dc.png" width="300"/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/66265368/173266358-82eaaf68-98cd-4515-8890-0e5e94b8f3dc.png" width="300">
+</p>
 
 ## Built with
 - [moallemi - kotlin-date-extensions](https://github.com/moallemi/kotlin-date-extensions)
